@@ -1,0 +1,32 @@
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@Composable
+fun MainScreenView(viewModel: TaskViewModel = hiltViewModel()){
+    val navController = rememberNavController()
+    val backStackEntry = navController.currentBackStackEntryAsState()
+    val currentRoute by remember(backStackEntry) { derivedStateOf { backStackEntry.value?.destination?.route } }
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navController = navController)
+                },
+        topBar = {  //CHANGED TO USE HAV HOST
+            when (currentRoute) {
+                NavigationBar.Home.route -> TopBar(title = stringResource(id = R.string.home))
+                NavigationBar.List.route -> TopBar(title = stringResource(id = R.string.list))
+                NavigationBar.Task.route -> TopBar(title = stringResource(id = R.string.tasks))
+                NavigationBar.Calendar.route -> TopBar(title = stringResource(id = R.string.calendar))
+            }
+        }
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = NavigationBar.Home.route,
+            modifier = Modifier.padding(it)
+        ) {
+            composable(NavigationBar.Home.route) { HomeScreen() }
+            composable(NavigationBar.List.route) { ListScreen() }
+            composable(NavigationBar.Task.route) { TaskScreen(viewModel = viewModel) }
+            composable(NavigationBar.Calendar.route) { CalendarScreen() }
+        }
+    }
+}
