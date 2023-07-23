@@ -42,6 +42,7 @@
     <string name="rabbits_foot_fern">Rabbit\'s Foot Fern</string>
     <string name="spider_plant">Spider Plant</string>
     <string name="golden_pothos">Golden Pothos</string>
+    <string name="yellow_orchid">Moth Orchid \'Jungle Cat Stripes\'</string>
 
     <string name="water_more">Water more</string>
     <string name="water_less">Water less</string>
@@ -107,8 +108,42 @@
     <string name="week_one_span_title">29.-31. July</string>
     <string name="week_two_span_title">05.-07. August</string>
     <string name="follow_system_language">Follow System Language</string>
-    <string name="on">On</string>
-    <string name="off">Off</string>
+    <string name="switch_on">On</string>
+    <string name="switch_off">Off</string>
     <string name="selected_room">Selected room</string>
-
+    <string name="water_peace_lily">"Bathroom: 500ml\nLiving room (grey pot): 350&#8211;400ml\nLiving room (green pot): 250&#8211;300ml\nLiving room (woven pot): 200ml"</string>
+    <string name="water_spider_plant">"Bathroom: 500ml\nKitchen: 100ml\nLiving room (black pot): 100ml\nLiving room (metal pot): 100ml\nLiving room (marble pot): 500ml\nLiving room (white pot): 200ml\nLiving room (grey plant box): 200ml &amp; fill up the Dropman (water dispenser)"</string>
+    <string name="water_kalanchoe">"Bathroom (window): 100ml\nBathroom (grey plant box): 400ml\nLiving room (black shelf): 100ml\nLiving room (grey pot, window): 100ml\nLiving room (small red cup): 15 pumps from the spray bottle"</string>
+    <string name="water_tradescantia">"Bathroom (window): 150&#8211;200ml\nBathroom (sink): 200ml\nLiving room (pink pot): 200ml\nLiving room (white pot): 200ml\nLiving room (grey pot, window): 100ml\nLiving room (large, grey pot): 300ml\nLiving room (coconut pot): 50&#8211;100ml"</string>
+    <string name="_100ml">100ml</string>
+    <string name="_150_200ml">150&#8211;200ml</string>
+    <string name="_50ml">50ml</string>
+    <string name="_300ml">300ml</string>
+    <string name="_200ml">200ml</string>
+    <string name="_10_pumps">10 pumps of the spray bottle</string>
+    <string name="water_chinese_money">"Brown pot: 100ml\nWoven pot: 100ml"</string>
+    <string name="_10ml">10ml</string>
+    <string name="_600ml">600ml</string>
+    <string name="_20ml">20ml</string>
+    <string name="_400ml">400ml</string>
+    <string name="handing_over_the_key">Handing over the Key</string>
+    <string name="_when">When?</string>
+    <string name="from">From?</string>
+    <string name="between_31_07_and_06_08">Between 31.07. and 06.08.</string>
+    <string name="my_trip">My Trip</string>
+    <string name="return_date">Return Date:</string>
+    <string name="return_date_details">14.08. (probably late)</string>
+    <string name="my_trip_para1">I might not have reliable internet access, so I might not be able to respond to messages quickly. Some plants are drama queens so if you  think a plant is dying, check the notes first.</string>
+    <string name="my_trip_para2">Notable drama queens are the Peace Lilies and the Bonsai. If they are running low on water, they will let their leaves hang like they\'ve never seen a drop of water in their whole life. They have. They are lying. The plants are manipulating you. Don\'t fall for it.</string>
+    <string name="tools_co">Tools &amp; Co.</string>
+    <string name="watering_can">Watering Can:</string>
+    <string name="under_the_kitchen_table">Under the kitchen table</string>
+    <string name="watering_can_details">It\'s a 5l can, so it\'s heavy when full. It fits under the kitchen tap if you place it with the spout facing the top right corner.</string>
+    <string name="spray_bottle">Spray Bottle:</string>
+    <string name="on_the_kitchen_table">On the kitchen table</string>
+    <string name="instructions">Instructions:</string>
+    <string name="frame">Frame:</string>
+    <string name="it_turns_on_and_off_by_itself_so_don_t_worry_if_it_s_on">It turns on and off by itself, so don\'t worry if it\'s on.</string>
+    <string name="frame_remote">Frame Remote:</string>
+    <string name="measuring_cup">Measuring Cup:</string>
 </resources>

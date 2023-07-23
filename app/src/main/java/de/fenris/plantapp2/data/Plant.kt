@@ -4,7 +4,7 @@ data class Plant(
     val name: Int,
     val latinName: String,
     val room: List<Room>,
-    val water: String,
+    val water: Int,
     val note: Int,
     val waterFrequency: Int,
     val warningSigns: List<WarningSign>,

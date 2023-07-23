@@ -30,106 +30,107 @@ fun TopBar(
     title: String,
     closeIcon: Boolean = false,
     onDismissRequest: () -> Unit = {},
-    appViewModel: AppViewModel = viewModel()) {
+    appViewModel: AppViewModel = viewModel()
+) {
     val appUiState by appViewModel.uiState.collectAsState()
-    /*var showSettings by remember {
-        mutableStateOf(false)
-    }*/
 
-    TopAppBar(
-        title = {
-            Text(
-                text = title,
-                fontSize = 22.sp,
-                fontWeight = FontWeight(400),
-                color = getOnSurfaceVariant(),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-        },
-        actions = {
-            if (closeIcon) {
-                IconButton(
-                    onClick = {
-                        onDismissRequest()
-                    }) {
-                    Icon(
-                        Icons.Default.Close,
-                        contentDescription = "Close Dialog"
-                    )
-                }
-            } else {
-                IconButton(
-                    onClick = {
-                        appViewModel.openSettings()
-                        //showSettings = true
-                    }) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = "Open Options",
-                        tint = getOnSurfaceVariant()
-                    )
-                }
+TopAppBar(
+    title = {
+        Text(
+            text = title,
+            fontSize = 22.sp,
+            fontWeight = FontWeight(400),
+            color = getOnSurfaceVariant(),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
+        )
+    },
+    actions = {
+        if (closeIcon) {
+            IconButton(
+                onClick = {
+                    onDismissRequest()
+                }) {
+                Icon(
+                    Icons.Default.Close,
+                    contentDescription = "Close Dialog"
+                )
             }
-        },
-        colors = TopAppBarDefaults.smallTopAppBarColors(
-            containerColor = getNavColor(),
-            titleContentColor = getOnSurfaceVariant()
+        } else {
+            IconButton(
+                onClick = {
+                    appViewModel.openSettings()
+                    //showSettings = true
+                }) {
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = "Open Options",
+                    tint = getOnSurfaceVariant()
+                )
+            }
+        }
+    },
+    colors = TopAppBarDefaults.smallTopAppBarColors(
+        containerColor = getNavColor(),
+        titleContentColor = getOnSurfaceVariant()
+    ),
+)
+if (appUiState.isSettingsOpen) {
+    Dialog(
+        onDismissRequest = {
+            appViewModel.closeSettings()
+            //showSettings = false
+                           },
+        properties = DialogProperties(
+            dismissOnBackPress = true,
+            usePlatformDefaultWidth = false
         ),
-    )
-    if (appUiState.isSettingsOpen) {
-        Dialog(
-            onDismissRequest = { appViewModel.closeSettings() /*showSettings = false*/ },
-            properties = DialogProperties(
-                dismissOnBackPress = true,
-                usePlatformDefaultWidth = false
-            ),
 
-            ) {
-            Scaffold(
-                topBar = {
-                    TopAppBar(
-                        title = {
-                            Text(
-                                text = stringResource(R.string.settings_title),
-                                modifier = Modifier.fillMaxWidth(),
-                                fontWeight = getWeight()
+        ) {
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = stringResource(R.string.settings_title),
+                            modifier = Modifier.fillMaxWidth(),
+                            fontWeight = getWeight()
+                        )
+                    },
+                    actions = {
+                        IconButton(
+                            onClick = {
+                                appViewModel.closeSettings()
+                                //showSettings = false
+                            }) {
+                            Icon(
+                                Icons.Default.Close,
+                                contentDescription = "Close Dialog"
                             )
-                        },
-                        actions = {
-                            IconButton(
-                                onClick = {
-                                    appViewModel.closeSettings()
-                                    //showSettings = false
-                                }) {
-                                Icon(
-                                    Icons.Default.Close,
-                                    contentDescription = "Close Dialog"
-                                )
-                            }
-                        },
-                        colors = TopAppBarDefaults.smallTopAppBarColors(
-                            containerColor = getNavColor(),
-                            titleContentColor = getOnSurfaceVariant()
-                        ),
-                    )
-                },
-                modifier = Modifier
-                    .background(MaterialTheme.colorScheme.background)
-            ) {
-                Box(Modifier.padding(it)) {
-                    SettingsScreen()
-                }
+                        }
+                    },
+                    colors = TopAppBarDefaults.smallTopAppBarColors(
+                        containerColor = getNavColor(),
+                        titleContentColor = getOnSurfaceVariant()
+                    ),
+                )
+            },
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.background)
+        ) {
+            Box(Modifier.padding(it)) {
+                SettingsScreen()
             }
         }
     }
 }
+}
 
 @Composable
 fun getWeight(): FontWeight {
-    return if (isSystemInDarkTheme()) {
-        FontWeight.Normal
-    } else {
-        FontWeight.Bold
-    }
+return if (isSystemInDarkTheme()) {
+    FontWeight.Normal
+} else {
+    FontWeight.Bold
+}
 }

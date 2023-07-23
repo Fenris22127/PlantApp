@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
@@ -101,7 +102,6 @@ fun ImageSlider(images: List<Any>) {
                     .background(Color(0xd9CACACA))
                     .padding(2.dp, 0.dp, 0.dp, 0.dp)
                     .align(if (pagerState.currentPage == 0) Alignment.CenterEnd else Alignment.CenterStart)
-
             ) {
                 if (pagerState.currentPage == 0) {
                     IconButton(
@@ -166,6 +166,7 @@ fun ImageSlider(images: List<Any>) {
 
 @Composable
 fun DetailFields(plant: Plant) {
+    val context = LocalContext.current
     Column {
         Text(
             text = stringResource(plant.name),
@@ -193,7 +194,7 @@ fun DetailFields(plant: Plant) {
             Icons.Outlined.WaterDrop,
             "Water Amount Icon",
             stringResource(R.string.water_amount),
-            "${plant.water} ml"
+            context.getString(plant.water)
         )
         Spacer(modifier = Modifier.height(10.dp))
         GetDetailCard(

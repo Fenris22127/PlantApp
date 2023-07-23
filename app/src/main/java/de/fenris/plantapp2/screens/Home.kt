@@ -20,10 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import de.fenris.plantapp2.R
 import de.fenris.plantapp2.Utils
 import de.fenris.plantapp2.ui.theme.getOnSurface
 
@@ -42,8 +44,6 @@ fun HomeScreen() {
             GetInfo()
             Spacer(modifier = Modifier.height(20.dp))
             GetMoreLessInfo()
-            //Spacer(modifier = Modifier.height(20.dp))
-            //GetMoreInfo()
         }
     }
 }
@@ -65,7 +65,7 @@ fun GetKeyHandover() {
         ) {
             Icon(
                 imageVector = Icons.Outlined.Key,
-                contentDescription = "Key",
+                contentDescription = "Key Icon",
                 modifier = Modifier
                     .size(40.dp)
                     .scale(scaleX = -1f, scaleY = 1f)
@@ -73,7 +73,7 @@ fun GetKeyHandover() {
                 tint = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Text(
-                text = "Handing over the Key",
+                text = stringResource(R.string.handing_over_the_key),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp),
@@ -81,7 +81,7 @@ fun GetKeyHandover() {
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
         }
-        Row (
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.Transparent),
@@ -90,7 +90,7 @@ fun GetKeyHandover() {
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "When?",
+                    text = stringResource(R.string._when),
                     modifier = Modifier
                         .padding(10.dp, 0.dp)
                         .width(65.dp),
@@ -98,25 +98,15 @@ fun GetKeyHandover() {
                     fontWeight = FontWeight(500)
                 )
             }
-            Box(contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Placeholder",
-                    modifier = Modifier
-                        .padding(10.dp, 0.dp),
-                    fontSize = 19.sp,
-                    fontWeight = FontWeight(700),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
-                    letterSpacing = 1.sp
-                )
-                Text(
-                    text = "01.08. at 12:00",
-                    modifier = Modifier
-                        .padding(10.dp, 0.dp),
-                    fontSize = 16.sp,
-                )
-            }
+            Text(
+                text = stringResource(R.string.between_31_07_and_06_08),
+                modifier = Modifier
+                    .padding(10.dp, 0.dp),
+                fontSize = 16.sp,
+            )
+
         }
-        Row (
+        /*Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.Transparent),
@@ -150,8 +140,8 @@ fun GetKeyHandover() {
                     fontSize = 16.sp,
                 )
             }
-        }
-        Row (
+        }*/
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.Transparent),
@@ -160,7 +150,7 @@ fun GetKeyHandover() {
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "From?",
+                    text = stringResource(R.string.from),
                     modifier = Modifier
                         .padding(10.dp, 0.dp)
                         .width(65.dp),
@@ -168,25 +158,14 @@ fun GetKeyHandover() {
                     fontWeight = FontWeight(500)
                 )
             }
-            Box(contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Placeholder",
-                    modifier = Modifier
-                        .padding(10.dp, 0.dp),
-                    fontSize = 19.sp,
-                    fontWeight = FontWeight(700),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
-                    letterSpacing = 1.sp
-                )
-                Text(
-                    text = "Person for Week 1",
-                    modifier = Modifier
-                        .padding(10.dp, 0.dp),
-                    fontSize = 16.sp,
-                )
-            }
+            Text(
+                text = "Malte",
+                modifier = Modifier
+                    .padding(10.dp, 0.dp),
+                fontSize = 16.sp,
+            )
         }
-        Row (
+        /*Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.Transparent),
@@ -195,7 +174,7 @@ fun GetKeyHandover() {
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "Contact:",
+                    text = stringResource(R.string.contact),
                     modifier = Modifier
                         .padding(10.dp, 0.dp)
                         .width(65.dp),
@@ -220,7 +199,7 @@ fun GetKeyHandover() {
                     fontSize = 16.sp,
                 )
             }
-        }
+        }*/
         Spacer(modifier = Modifier.height(7.dp))
     }
 }
@@ -242,13 +221,13 @@ fun GetInfo() {
         ) {
             Icon(
                 imageVector = Icons.Default.Person,
-                contentDescription = "Person",
+                contentDescription = "Person Icon",
                 modifier = Modifier
                     .size(40.dp),
                 tint = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Text(
-                text = "My Trip",
+                text = stringResource(R.string.my_trip),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp),
@@ -266,46 +245,28 @@ fun GetInfo() {
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "Return Date:",
+                    text = stringResource(R.string.return_date),
                     modifier = Modifier
                         .padding(10.dp, 0.dp),
                     fontSize = 16.sp,
                     fontWeight = FontWeight(500)
                 )
             }
-            Box(contentAlignment = Alignment.Center) {
-                Text(
-                    text = "Placeholder",
-                    modifier = Modifier
-                        .padding(10.dp, 0.dp),
-                    fontSize = 19.sp,
-                    fontWeight = FontWeight(700),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.15f),
-                    letterSpacing = 1.sp
-                )
-                Text(
-                    text = "13.08. (probably late)",
-                    modifier = Modifier
-                        .padding(10.dp, 0.dp),
-                    fontSize = 16.sp,
-                )
-            }
+            Text(
+                text = stringResource(R.string.return_date_details),
+                modifier = Modifier
+                    .padding(10.dp, 0.dp),
+                fontSize = 16.sp,
+            )
         }
         Text(
-            text =
-            "I might not have reliable internet access, so I might not be able to respond to " +
-                    "messages quickly. Some plants are drama queens so if you " +
-                    "think a plant is dying, check the notes first.",
+            text = stringResource(id = R.string.my_trip_para1),
             modifier = Modifier
                 .padding(10.dp, 5.dp),
             fontSize = 16.sp,
         )
         Text(
-            text =
-            "Notable drama queens are the Peace Lilies and the Bonsai. If they are running low on " +
-                    "water, they will let their leaves hang like they've never seen a drop of water " +
-                    "in their whole life. They have. The plants are manipulating you. Don't fall for " +
-                    "it.",
+            text = stringResource(id = R.string.my_trip_para2),
             modifier = Modifier
                 .padding(10.dp, 0.dp),
             fontSize = 16.sp,
@@ -331,13 +292,13 @@ fun GetMoreLessInfo() {
         ) {
             Icon(
                 imageVector = Icons.Default.HomeRepairService,
-                contentDescription = "Tools & Co.",
+                contentDescription = "Tools & Co. Icon",
                 modifier = Modifier
                     .size(40.dp),
                 tint = MaterialTheme.colorScheme.onPrimaryContainer
             )
             Text(
-                text = "Tools & Co.",
+                text = stringResource(R.string.tools_co),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp),
@@ -347,7 +308,7 @@ fun GetMoreLessInfo() {
         }
         Row {
             Text(
-                text = "Watering Can:",
+                text = stringResource(R.string.watering_can),
                 modifier = Modifier
                     .padding(10.dp, 0.dp)
                     .width(125.dp),
@@ -356,16 +317,13 @@ fun GetMoreLessInfo() {
             )
             Column {
                 Text(
-                    text =
-                    "Under the kitchen table",
+                    text = stringResource(R.string.under_the_kitchen_table),
                     modifier = Modifier
                         .padding(10.dp, 3.dp),
                     fontSize = 16.sp,
                 )
                 Text(
-                    text =
-                    "It's a 5l can, so it's heavy when full. It fits under the " +
-                            "kitchen tap if you place it with the spout facing the top right corner.",
+                    text = stringResource(R.string.watering_can_details),
                     modifier = Modifier
                         .padding(10.dp, 3.dp),
                     fontSize = 13.sp,
@@ -375,7 +333,7 @@ fun GetMoreLessInfo() {
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = "Spray Bottle:",
+                text = stringResource(R.string.spray_bottle),
                 modifier = Modifier
                     .padding(10.dp, 0.dp)
                     .width(125.dp),
@@ -383,8 +341,7 @@ fun GetMoreLessInfo() {
                 fontWeight = FontWeight(500)
             )
             Text(
-                text =
-                "On the kitchen table",
+                text = stringResource(R.string.on_the_kitchen_table),
                 modifier = Modifier
                     .padding(10.dp, 3.dp),
                 fontSize = 16.sp,
@@ -392,7 +349,7 @@ fun GetMoreLessInfo() {
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = "Measuring Cup:",
+                text = stringResource(R.string.measuring_cup),
                 modifier = Modifier
                     .padding(10.dp, 0.dp)
                     .width(125.dp),
@@ -400,8 +357,7 @@ fun GetMoreLessInfo() {
                 fontWeight = FontWeight(500)
             )
             Text(
-                text =
-                "On the kitchen table",
+                text = stringResource(R.string.on_the_kitchen_table),
                 modifier = Modifier
                     .padding(10.dp, 3.dp),
                 fontSize = 16.sp,
@@ -409,7 +365,7 @@ fun GetMoreLessInfo() {
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = "Instructions:",
+                text = stringResource(R.string.instructions),
                 modifier = Modifier
                     .padding(10.dp, 0.dp)
                     .width(125.dp),
@@ -417,8 +373,7 @@ fun GetMoreLessInfo() {
                 fontWeight = FontWeight(500)
             )
             Text(
-                text =
-                "On the kitchen table",
+                text = stringResource(R.string.on_the_kitchen_table),
                 modifier = Modifier
                     .padding(10.dp, 3.dp),
                 fontSize = 16.sp,
@@ -426,7 +381,7 @@ fun GetMoreLessInfo() {
         }
         Row {
             Text(
-                text = "Frame:",
+                text = stringResource(R.string.frame),
                 modifier = Modifier
                     .padding(10.dp, 0.dp)
                     .width(125.dp),
@@ -435,15 +390,13 @@ fun GetMoreLessInfo() {
             )
             Column {
                 Text(
-                    text =
-                    "On the kitchen table",
+                    text = stringResource(R.string.on_the_kitchen_table),
                     modifier = Modifier
                         .padding(10.dp, 3.dp),
                     fontSize = 16.sp,
                 )
                 Text(
-                    text =
-                    "It turns on and off by itself, so don't worry if it's on.",
+                    text = stringResource(R.string.it_turns_on_and_off_by_itself_so_don_t_worry_if_it_s_on),
                     modifier = Modifier
                         .padding(10.dp, 3.dp),
                     fontSize = 13.sp,
@@ -453,7 +406,7 @@ fun GetMoreLessInfo() {
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
-                text = "Frame Remote:",
+                text = stringResource(R.string.frame_remote),
                 modifier = Modifier
                     .padding(10.dp, 0.dp)
                     .width(125.dp),
@@ -461,8 +414,7 @@ fun GetMoreLessInfo() {
                 fontWeight = FontWeight(500)
             )
             Text(
-                text =
-                "On the kitchen table",
+                text = stringResource(R.string.on_the_kitchen_table),
                 modifier = Modifier
                     .padding(10.dp, 3.dp),
                 fontSize = 16.sp,

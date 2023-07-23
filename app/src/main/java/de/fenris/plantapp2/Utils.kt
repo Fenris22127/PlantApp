@@ -59,6 +59,11 @@ class Utils {
         }
 
         @Composable
+        fun getRes(res: Int): String {
+            return LocalContext.current.getString(res)
+        }
+
+        @Composable
         fun getRoom(room: Room): String {
             return when (room) {
                 Room.ALL_ROOMS -> stringResource(R.string.room_all_rooms)

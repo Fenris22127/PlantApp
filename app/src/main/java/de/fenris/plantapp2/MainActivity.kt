@@ -2,6 +2,7 @@ package de.fenris.plantapp2
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import de.fenris.plantapp2.organisation.TaskViewModel
+import de.fenris.plantapp2.viewmodel.TaskViewModel
 import de.fenris.plantapp2.navigation.BottomNavigationBar
 import de.fenris.plantapp2.navigation.NavigationBar
 import de.fenris.plantapp2.navigation.TopNavBar
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun MainScreenView(viewModel: TaskViewModel = hiltViewModel()){
     val navController = rememberNavController()
+
     Scaffold(
         bottomBar = {
             BottomNavigationBar(navController = navController)
@@ -69,6 +71,9 @@ fun MainScreenView(viewModel: TaskViewModel = hiltViewModel()){
             composable(NavigationBar.Calendar.route) { CalendarScreen() }
         }
     }
+    BackHandler(onBack = {
+        navController.popBackStack()
+    })
 }
 
 @Preview(showBackground = true)

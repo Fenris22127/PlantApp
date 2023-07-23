@@ -1,6 +1,5 @@
 package de.fenris.plantapp2.screens
 
-import android.view.inputmethod.InputMethodManager
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -25,7 +24,6 @@ import androidx.compose.ui.window.DialogProperties
 import de.fenris.plantapp2.R
 import de.fenris.plantapp2.Utils
 import de.fenris.plantapp2.data.*
-import kotlin.collections.ArrayList
 
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
@@ -34,11 +32,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.*
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import de.fenris.plantapp2.ui.theme.getSurfaceContainer
 import de.fenris.plantapp2.ui.theme.getTextFieldBackground
+import de.fenris.plantapp2.viewmodel.AppUiState
+import de.fenris.plantapp2.viewmodel.AppViewModel
 
 @Composable
 fun ListScreen() {
@@ -49,19 +49,20 @@ fun ListScreen() {
                 .fillMaxSize()
                 .wrapContentSize(Alignment.TopCenter)
         ) {
-            val roomState = remember { mutableStateOf(Room.ALL_ROOMS) }
-            SearchView(roomState)
-            FilterPlantList(room = roomState)
+            SearchView()
+            FilterPlantList()
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchView(chosen: MutableState<Room>) {
+fun SearchView(
+    appViewModel: AppViewModel = viewModel()
+) {
+    val appUiState by appViewModel.uiState.collectAsState()
     val listItems: List<String> = Room.values().map { Utils.getRoom(it) }.toList()
     val context = LocalContext.current
-    var selectedItemIndex by remember { mutableIntStateOf(0) }
     var expanded by remember {
         mutableStateOf(false)
     }
@@ -77,7 +78,7 @@ fun SearchView(chosen: MutableState<Room>) {
             modifier = Modifier
                 .width(200.dp)
                 .menuAnchor()
-                .onFocusChanged {
+                /*.onFocusChanged {
                     if (it.isFocused) {
                         context
                             .findActivity()
@@ -90,7 +91,7 @@ fun SearchView(chosen: MutableState<Room>) {
                                 )
                             }
                     }
-                },
+                }*/,
             label = {
                 Text(
                     stringResource(R.string.selected_room),
@@ -99,7 +100,7 @@ fun SearchView(chosen: MutableState<Room>) {
                         .compositeOver(MaterialTheme.colorScheme.onSurfaceVariant)
                 )
             },
-            value = listItems[selectedItemIndex],
+            value = appUiState.selectedRoom.toString(context = context),
             onValueChange = {},
             readOnly = true,
             enabled = false,
@@ -132,7 +133,6 @@ fun SearchView(chosen: MutableState<Room>) {
                 cursorColor = MaterialTheme.colorScheme.secondary,
                 textColor = MaterialTheme.colorScheme.onSurface,
                 placeholderColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
-                //trailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 disabledTextColor = MaterialTheme.colorScheme.onSurface,
             ),
         )
@@ -147,13 +147,12 @@ fun SearchView(chosen: MutableState<Room>) {
                     text = {
                         Text(
                             text = item,
-                            fontWeight = if (index == selectedItemIndex) FontWeight.Bold else null
+                            fontWeight = if (index == appUiState.selectedRoomIndex /*selectedItemIndex*/) FontWeight.Bold else null
                         )
                     },
                     onClick = {
-                        selectedItemIndex = index
                         expanded = false
-                        chosen.value = Room.values()[index]
+                        appViewModel.updateSelectedRoom(Room.values()[index], index)
                     },
                 )
             }
@@ -162,34 +161,20 @@ fun SearchView(chosen: MutableState<Room>) {
 }
 
 @Composable
-fun FilterPlantList(room: MutableState<Room>) {
+fun FilterPlantList(
+    appViewModel: AppViewModel = viewModel()
+) {
+    val appUiState by appViewModel.uiState.collectAsState()
     val plantList = PlantList.instance
     if (plantList.allPlants.isEmpty()) {
         plantList.setData()
     }
-    val list = plantList.allPlants.sortedBy { it.name }.toMutableList()
-    var filteredPlants: List<Plant>
 
     LazyColumn(modifier = Modifier
         .fillMaxWidth()
         .padding(5.dp, 0.dp, 0.dp, 0.dp)) {
-        val selectedRoom = room.value
-
-        filteredPlants = if (selectedRoom == Room.ALL_ROOMS) {
-            list
-        } else {
-            val resultList = ArrayList<Plant>()
-            for (plant in list) {
-                if (plant.room.contains(selectedRoom)
-                ) {
-                    resultList.add(plant)
-                }
-            }
-            resultList
-        }
-
-        items(filteredPlants) { plant ->
-            GetCells4Plants(plant)
+        items(appUiState.plantList) { plant ->
+            GetCells4Plants(plant, appViewModel, appUiState)
             Divider()
         }
     }
@@ -197,13 +182,10 @@ fun FilterPlantList(room: MutableState<Room>) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GetCells4Plants(plant: Plant) {
-    var showDialog by remember {
-        mutableStateOf(false)
-    }
-    if (showDialog) {
+fun GetCells4Plants(plant: Plant, appViewModel: AppViewModel, appUiState: AppUiState) {
+    if (appUiState.isPlantDetailsOpen) {
         Dialog(
-            onDismissRequest = { showDialog = false },
+            onDismissRequest = { appViewModel.closePlantDetails() },
             properties = DialogProperties(
                 dismissOnBackPress = true,
                 usePlatformDefaultWidth = false
@@ -213,21 +195,24 @@ fun GetCells4Plants(plant: Plant) {
             Scaffold(
                 topBar = {
                     TopBar(
-                        title = stringResource(plant.name),
+                        title = stringResource(appUiState.selectedPlant!!.name),
                         closeIcon = true,
-                        onDismissRequest = { showDialog = false }
+                        onDismissRequest = { appViewModel.closePlantDetails() }
                     )
                 },
             ) {
                 Box(Modifier.padding(it)) {
-                    DetailsScreen(plant)
+                    DetailsScreen(appUiState.selectedPlant!!)
                 }
             }
         }
     }
 
     Row(Modifier.clickable(
-        onClick = { showDialog = true }
+        onClick = {
+            appViewModel.openPlantDetails()
+            appViewModel.updateSelectedPlant(plant)
+        }
     )) {
         Image(
             painter = painterResource(id = plant.coverImage),
@@ -242,7 +227,7 @@ fun GetCells4Plants(plant: Plant) {
                 text = stringResource(plant.name),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(10.dp, 0.dp, 0.dp, 0.dp),
+                modifier = Modifier.padding(10.dp, 7.dp, 0.dp, 0.dp),
                 color = MaterialTheme.colorScheme.onSurface
             )
             Row(
@@ -268,7 +253,6 @@ fun GetCells4Plants(plant: Plant) {
             ) {
                 Icon(
                     Icons.Filled.WaterDrop,
-                    //painter = painterResource(id = R.drawable.ic_water_drop),
                     contentDescription = "Water frequency icon",
                     modifier = Modifier
                         .padding(10.dp, 0.dp, 0.dp, 0.dp)
@@ -285,7 +269,6 @@ fun GetCells4Plants(plant: Plant) {
             Row {
                 Icon(
                     Icons.Outlined.StickyNote2,
-                    //painter = painterResource(id = R.drawable.ic_sticky_note),
                     contentDescription = "Note icon",
                     modifier = Modifier
                         .padding(10.dp, 3.dp, 0.dp, 0.dp)
@@ -306,7 +289,6 @@ fun GetCells4Plants(plant: Plant) {
             ) {
                 Icon(
                     imageVector = Icons.Filled.Shield,
-                    //painter = painterResource(id = R.drawable.ic_shield_filled),
                     contentDescription = "Shield icon",
                     modifier = Modifier
                         .padding(10.dp, 0.dp, 0.dp, 0.dp)

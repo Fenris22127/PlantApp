@@ -1,4 +1,4 @@
-package de.fenris.plantapp2.organisation
+package de.fenris.plantapp2.viewmodel
 
 import android.app.Application
 import androidx.compose.runtime.mutableStateOf
@@ -35,8 +35,8 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    var listOne: MutableList<Task> = mutableListOf()
-    var listTwo: MutableList<Task> = mutableListOf()
+    private var listOne: MutableList<Task> = mutableListOf()
+    private var listTwo: MutableList<Task> = mutableListOf()
     private fun fetchTaskData() {
         viewModelScope.launch {
             val plantListOne = PlantList.instance

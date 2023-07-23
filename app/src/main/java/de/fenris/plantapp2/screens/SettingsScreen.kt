@@ -154,9 +154,9 @@ fun SettingsScreen() {
             supportingText = {
                 Text(
                     if (isAppInDarkTheme()) {
-                        stringResource(R.string.on)
+                        stringResource(R.string.switch_on)
                     } else {
-                        stringResource(R.string.off)
+                        stringResource(R.string.switch_off)
                     },
                     modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
                     fontSize = 12.sp,

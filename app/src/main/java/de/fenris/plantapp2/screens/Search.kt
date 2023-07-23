@@ -27,8 +27,8 @@ import androidx.compose.ui.window.DialogProperties
 import de.fenris.plantapp2.R
 import de.fenris.plantapp2.Utils
 import de.fenris.plantapp2.data.Task
-import de.fenris.plantapp2.organisation.TaskListViewEvent
-import de.fenris.plantapp2.organisation.TaskViewModel
+import de.fenris.plantapp2.viewmodel.TaskListViewEvent
+import de.fenris.plantapp2.viewmodel.TaskViewModel
 import de.fenris.plantapp2.navigation.TopBar
 import de.fenris.plantapp2.ui.theme.getNavColor
 import de.fenris.plantapp2.ui.theme.getOnInverseSurface
@@ -204,7 +204,6 @@ fun GetTasks4Plants(
                 dismissOnBackPress = true,
                 usePlatformDefaultWidth = false
             ),
-
             ) {
             Scaffold(
                 topBar = {
@@ -328,8 +327,7 @@ fun GetTasks4Plants(
                 .padding(0.dp, 0.dp, 0.dp, 0.dp),
             colors = ListItemDefaults.colors(
                 containerColor = getNavColor().copy(alpha = 0.95f).compositeOver(Color.White),
-
-                )
+            )
         )
     }
 }

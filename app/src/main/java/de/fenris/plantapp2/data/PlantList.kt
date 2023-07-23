@@ -5,7 +5,6 @@ import de.fenris.plantapp2.R
 class PlantList {
 
     val allPlants = mutableListOf<Plant>()
-
     fun setData() {
         allPlants.addAll(
             listOf(
@@ -14,7 +13,7 @@ class PlantList {
                     R.string.peace_lily,
                     "Spathiphyllum wallisii",
                     listOf(Room.BATHROOM, Room.LIVING_ROOM),
-                    "0",
+                    R.string.water_peace_lily,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -29,7 +28,7 @@ class PlantList {
                     R.string.spider_plant,
                     "Chlorophytum comosum",
                     listOf(Room.BATHROOM, Room.LIVING_ROOM, Room.KITCHEN),
-                    "0",
+                    R.string.water_spider_plant,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -44,7 +43,7 @@ class PlantList {
                     R.string.monstera,
                     "Monstera deliciosa",
                     listOf(Room.BATHROOM),
-                    "0",
+                    R.string._300ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -59,7 +58,7 @@ class PlantList {
                     R.string.golden_pothos,
                     "Epipremnum aureum",
                     listOf(Room.BATHROOM),
-                    "0",
+                    R.string._150_200ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -74,9 +73,9 @@ class PlantList {
                     R.string.pink_orchid,
                     "Phalaenopsis Sogo Berry",
                     listOf(Room.BATHROOM),
-                    "0",
+                    R.string._100ml,
                     R.string.spray_with_water,
-                    R.string.once_a_week,
+                    R.string.once_in_2_weeks,
                     listOf(
                         WarningSign(R.string.floppy_wrinkled_leaves, R.string.water_more),
                         WarningSign(R.string.yellowing_floppy_wrinkled_leaves, R.string.water_less)
@@ -89,9 +88,9 @@ class PlantList {
                     R.string.white_orchid,
                     "Phalaenopsis",
                     listOf(Room.BATHROOM),
-                    "0",
+                    R.string._50ml,
                     R.string.spray_with_water,
-                    R.string.once_a_week,
+                    R.string.once_in_2_weeks,
                     listOf(
                         WarningSign(R.string.floppy_wrinkled_leaves, R.string.water_more),
                         WarningSign(R.string.yellowing_floppy_wrinkled_leaves, R.string.water_less)
@@ -104,9 +103,9 @@ class PlantList {
                     R.string.spotted_orchid,
                     "Phalaenopsis 'Purple Rain'",
                     listOf(Room.BATHROOM),
-                    "0",
+                    R.string._100ml,
                     R.string.spray_with_water,
-                    R.string.once_a_week,
+                    R.string.once_in_2_weeks,
                     listOf(
                         WarningSign(R.string.floppy_wrinkled_leaves, R.string.water_more),
                         WarningSign(R.string.yellowing_floppy_wrinkled_leaves, R.string.water_less)
@@ -116,10 +115,25 @@ class PlantList {
                     R.drawable.img_plant
                 ),
                 Plant(
+                    R.string.yellow_orchid,
+                    "Phalaenopsis 'Jungle Cat Stripes'",
+                    listOf(Room.BATHROOM),
+                    R.string._150_200ml,
+                    R.string.spray_with_water,
+                    R.string.once_in_2_weeks,
+                    listOf(
+                        WarningSign(R.string.floppy_wrinkled_leaves, R.string.water_more),
+                        WarningSign(R.string.yellowing_floppy_wrinkled_leaves, R.string.water_less)
+                    ),
+                    Sensitivity.MEDIUM,
+                    R.drawable.img_yellow_orchid,
+                    R.drawable.img_plant
+                ),
+                Plant(
                     R.string.kalanchoe,
                     "Kalanchoe blossfeldiana",
                     listOf(Room.BATHROOM, Room.LIVING_ROOM),
-                    "Small red cup: 15 pumps from the spray bottle",
+                    R.string.water_kalanchoe,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -134,7 +148,7 @@ class PlantList {
                     R.string.asparagus_fern,
                     "Asparagus setaceus",
                     listOf(Room.BATHROOM),
-                    "0",
+                    R.string._100ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -149,7 +163,7 @@ class PlantList {
                     R.string.wandering_jew,
                     "Tradescantia zebrina",
                     listOf(Room.BATHROOM, Room.LIVING_ROOM),
-                    "0",
+                    R.string.water_tradescantia,
                     R.string.pale_leaves_happen,
                     R.string.once_a_week,
                     listOf(
@@ -165,7 +179,7 @@ class PlantList {
                     R.string.bonsai,
                     "Ligustrum sinense",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._200ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -181,7 +195,7 @@ class PlantList {
                     R.string.banana,
                     "Musa oriana",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._50ml,
                     R.string.brown_leaves_happen,
                     R.string.once_a_week,
                     listOf(
@@ -196,7 +210,7 @@ class PlantList {
                     R.string.snake_plant,
                     "Sansevieria trifasciata",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._50ml,
                     R.string.note_empty,
                     R.string.frequency_none,
                     listOf(),
@@ -208,7 +222,7 @@ class PlantList {
                     R.string.aloe,
                     "Aloe vera",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._50ml,
                     R.string.note_empty,
                     R.string.once_in_2_weeks,
                     listOf(
@@ -223,7 +237,7 @@ class PlantList {
                     R.string.false_christmas_cactus,
                     "Schlumbergera truncata",
                     listOf(Room.LIVING_ROOM),
-                    "10 pumps of the spray bottle",
+                    R.string._10_pumps,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -237,7 +251,7 @@ class PlantList {
                     R.string.japanese_woodland_stonecrop,
                     "Sedum makinoi 'Tundra Tornado'",
                     listOf(Room.LIVING_ROOM),
-                    "10 pumps from the spray bottle",
+                    R.string._10_pumps,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -251,7 +265,7 @@ class PlantList {
                     R.string.chinese_money_plant,
                     "Pilea peperomioides",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string.water_chinese_money,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -265,9 +279,9 @@ class PlantList {
                     R.string.amaryllis,
                     "Hippeastrum",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._50ml,
                     R.string.note_empty,
-                    R.string.once_a_week,
+                    R.string.once_in_2_weeks,
                     listOf(
                         WarningSign(R.string.yellowing_leaves, R.string.water_more)
                     ),
@@ -279,7 +293,7 @@ class PlantList {
                     R.string.fig_cactus,
                     "Opuntia ficus-indica",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._50ml,
                     R.string.note_empty,
                     R.string.frequency_none,
                     listOf(
@@ -293,7 +307,7 @@ class PlantList {
                     R.string.argentine_giant,
                     "Echinopsis candicans",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._10ml,
                     R.string.note_empty,
                     R.string.frequency_none,
                     listOf(
@@ -307,7 +321,7 @@ class PlantList {
                     R.string.parlor_palm,
                     "Chamaedorea elegans",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._100ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -322,7 +336,7 @@ class PlantList {
                     R.string.calathea,
                     "Calathea luisiae",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._200ml,
                     R.string.spray_with_water,
                     R.string.once_a_week,
                     listOf(
@@ -337,7 +351,7 @@ class PlantList {
                     R.string.bamboo,
                     "Dracaena sanderiana",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._100ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -352,9 +366,9 @@ class PlantList {
                     R.string.arrowhead,
                     "Syngonium podophyllum",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._600ml,
                     R.string.note_empty,
-                    R.string.once_a_week,
+                    R.string.once_in_2_weeks,
                     listOf(
                         WarningSign(R.string.pale_hanging_leaves, R.string.water_more),
                         WarningSign(R.string.yellowing_leaves, R.string.water_less)
@@ -367,7 +381,7 @@ class PlantList {
                     R.string.lizard_tail,
                     "Gasteraloe beguinii",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._20ml,
                     R.string.note_empty,
                     R.string.frequency_none,
                     listOf(
@@ -382,7 +396,7 @@ class PlantList {
                     R.string.moon_valley_pilea,
                     "Pilea mollis 'Moon Valley'",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._200ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -396,7 +410,7 @@ class PlantList {
                     R.string.guzmania_hope,
                     "Guzmania lingulata 'Hope'",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._50ml,
                     R.string.note_empty,
                     R.string.once_in_2_weeks,
                     listOf(
@@ -410,7 +424,7 @@ class PlantList {
                     R.string.jade_pothos,
                     "Epipremnum aureum",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._400ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -425,7 +439,7 @@ class PlantList {
                     R.string.heart_leaf,
                     "Philodendron hederaceum",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._100ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -440,7 +454,7 @@ class PlantList {
                     R.string.jade_plant,
                     "Crassula ovata",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._50ml,
                     R.string.note_empty,
                     R.string.once_in_2_weeks,
                     listOf(
@@ -454,7 +468,7 @@ class PlantList {
                     R.string.clearweed,
                     "Pilea depressa",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._200ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -469,7 +483,7 @@ class PlantList {
                     R.string.dracaena,
                     "Dracaena marginata 'Bicolor'",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._100ml,
                     R.string.note_empty,
                     R.string.once_a_week,
                     listOf(
@@ -484,7 +498,7 @@ class PlantList {
                     R.string.flaming_sword,
                     "Vriesea-Cutivars 'Davine'",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._200ml,
                     R.string.note_empty,
                     R.string.once_in_2_weeks,
                     listOf(
@@ -498,9 +512,9 @@ class PlantList {
                     R.string.rabbits_foot_fern,
                     "Davallia fejeensis",
                     listOf(Room.LIVING_ROOM),
-                    "0",
+                    R.string._200ml,
                     R.string.note_empty,
-                    R.string.once_a_week,
+                    R.string.once_in_2_weeks,
                     listOf(
                         WarningSign(R.string.brown_dry_leaves, R.string.water_more),
                         WarningSign(R.string.yellowing_leaves, R.string.water_less)

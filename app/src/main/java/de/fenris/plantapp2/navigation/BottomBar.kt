@@ -41,17 +41,18 @@ fun BottomNavigationBar(navController: NavController) {
                     )
                 },
                 alwaysShowLabel = true,
-                selected = currentRoute == item.route,
+                selected = navController.currentBackStackEntryAsState().value?.destination?.route == item.route /*currentRoute == item.route*/,
                 onClick = {
                     navController.navigate(item.route) {
-
-                        navController.graph.startDestinationRoute?.let { screenRoute ->
+                        //popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                        /*navController.graph.startDestinationRoute?.let { screenRoute ->
                             popUpTo(screenRoute) {
                                 saveState = true
                             }
                         }
                         launchSingleTop = true
-                        restoreState = true
+                        restoreState = true*/
                     }
                 }
             )
