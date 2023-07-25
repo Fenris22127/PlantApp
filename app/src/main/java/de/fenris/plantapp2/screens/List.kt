@@ -77,21 +77,7 @@ fun SearchView(
         TextField(
             modifier = Modifier
                 .width(200.dp)
-                .menuAnchor()
-                /*.onFocusChanged {
-                    if (it.isFocused) {
-                        context
-                            .findActivity()
-                            ?.let { activity ->
-                                val inputMethodManager =
-                                    activity.getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                                inputMethodManager.hideSoftInputFromWindow(
-                                    activity.currentFocus?.windowToken,
-                                    0
-                                )
-                            }
-                    }
-                }*/,
+                .menuAnchor(),
             label = {
                 Text(
                     stringResource(R.string.selected_room),
@@ -147,7 +133,7 @@ fun SearchView(
                     text = {
                         Text(
                             text = item,
-                            fontWeight = if (index == appUiState.selectedRoomIndex /*selectedItemIndex*/) FontWeight.Bold else null
+                            fontWeight = if (index == appUiState.selectedRoomIndex) FontWeight.Bold else null
                         )
                     },
                     onClick = {

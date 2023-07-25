@@ -5,7 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import de.fenris.plantapp2.R
-import de.fenris.plantapp2.data.*
+import de.fenris.plantapp2.data.PlantList
+import de.fenris.plantapp2.data.Task
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch

@@ -26,6 +26,7 @@ private val DarkColorPalette = darkColorScheme(
     background = Color(0xFF191919),
     onBackground = Color(0xFFDDE6DE),
     onPrimaryContainer = Color(0xFFD1F3D1),
+    outlineVariant = Color(0xFF414B42),
 )
 
 private val LightColorPalette = lightColorScheme(
@@ -45,6 +46,7 @@ private val LightColorPalette = lightColorScheme(
     background = Color(0xFFF8FAF8),
     onBackground = Color(0xFF191E19),
     onPrimaryContainer = Color(0xFF002200),
+    outlineVariant = Color(0xFFC0CCC0),
 )
 
 @Composable

@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -44,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreenView(viewModel: TaskViewModel = hiltViewModel()){
+fun MainScreenView(taskViewModel: TaskViewModel = hiltViewModel()){
     val navController = rememberNavController()
 
     Scaffold(
@@ -62,22 +61,16 @@ fun MainScreenView(viewModel: TaskViewModel = hiltViewModel()){
         ) {
             composable(TopNavBar.Home.route) { HomeScreen() }
             composable(TopNavBar.List.route) { ListScreen() }
-            composable(TopNavBar.Task.route) { TaskScreen(viewModel = viewModel) }
+            composable(TopNavBar.Task.route) { TaskScreen(viewModel = taskViewModel) }
             composable(TopNavBar.Calendar.route) { CalendarScreen() }
 
             composable(NavigationBar.Home.route) { HomeScreen() }
             composable(NavigationBar.List.route) { ListScreen() }
-            composable(NavigationBar.Task.route) { TaskScreen(viewModel = viewModel) }
+            composable(NavigationBar.Task.route) { TaskScreen(viewModel = taskViewModel) }
             composable(NavigationBar.Calendar.route) { CalendarScreen() }
         }
     }
     BackHandler(onBack = {
         navController.popBackStack()
     })
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    //MainScreenView()
 }

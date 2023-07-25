@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
+import android.os.Build.VERSION_CODES
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -17,8 +19,8 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -26,17 +28,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.core.os.LocaleListCompat
+import de.fenris.plantapp2.BuildConfig
 import de.fenris.plantapp2.R
 import de.fenris.plantapp2.Utils
 import de.fenris.plantapp2.data.Language
-import de.fenris.plantapp2.organisation.UserStore
 import de.fenris.plantapp2.navigation.getWeight
+import de.fenris.plantapp2.organisation.UserStore
 import de.fenris.plantapp2.ui.theme.getNavColor
 import de.fenris.plantapp2.ui.theme.getOnSurface
 import de.fenris.plantapp2.ui.theme.getOnSurfaceVariant
@@ -45,6 +51,8 @@ import de.fenris.plantapp2.ui.theme.isAppInDarkTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
+import java.lang.reflect.Field
 import java.util.*
 
 var languages = emptyList<Language>()
@@ -61,7 +69,7 @@ fun getLanguages(context: Context): List<Language> {
         Language("English (United Kingdom)", "English (United Kingdom)", "en-GB", "en-rGB")
     val englishUS =
         Language("English (United States)", "English (United States)", "en-US", "en-rUS")
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    return if (Build.VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
         listOf(system, german, englishGB, englishUS)
     } else {
         listOf(german, englishGB, englishUS)
@@ -69,7 +77,7 @@ fun getLanguages(context: Context): List<Language> {
 }
 
 var chosenLanguage: String =
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) "system" else "en-GB"
+    if (Build.VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) "system" else "en-GB"
 var languagePref: State<String> = mutableStateOf(chosenLanguage)
 
 fun Context.findActivity(): Activity? = when (this) {
@@ -96,6 +104,10 @@ fun SettingsScreen() {
     var darkModeChoice by remember {
         mutableStateOf(false)
     }
+    var showAbout by remember {
+        mutableStateOf(false)
+    }
+
     Column(
         modifier = Modifier
             .padding(10.dp, 10.dp)
@@ -111,7 +123,7 @@ fun SettingsScreen() {
         ListItem(
             headlineText = {
                 Text(
-                    stringResource(R.string.language_setting),
+                    stringResource(R.string.language),
                     modifier = Modifier.padding(0.dp, 0.dp),
                     fontSize = 18.sp
                 )
@@ -160,7 +172,7 @@ fun SettingsScreen() {
                     },
                     modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
                     fontSize = 12.sp,
-                    color = if (isAppInDarkTheme()) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurface
+                    color = if (isAppInDarkTheme()) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                 )
             },
             trailingContent = {
@@ -191,6 +203,37 @@ fun SettingsScreen() {
                 .padding(0.dp, 0.dp)
                 .fillMaxWidth()
         )
+        Divider(
+            modifier = Modifier.padding(10.dp, 2.dp)
+        )
+        ListItem(
+            headlineText = {
+                Text(
+                    stringResource(R.string.about),
+                    modifier = Modifier.padding(0.dp, 0.dp),
+                    fontSize = 18.sp
+                )
+            },
+            supportingText = {
+                Text(
+                    stringResource(R.string.about_details),
+                    modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = Utils
+                    .getBackgroundColor()
+                    .compositeOver(MaterialTheme.colorScheme.background)
+            ),
+            modifier = Modifier
+                .padding(0.dp, 0.dp)
+                .fillMaxWidth()
+                .clickable {
+                    showAbout = true
+                }
+        )
     }
 
     if (showLanguageChoice) {
@@ -206,18 +249,18 @@ fun SettingsScreen() {
                     TopAppBar(
                         title = {
                             Text(
-                                text = stringResource(R.string.language_title),
+                                text = stringResource(R.string.language),
                                 modifier = Modifier.fillMaxWidth(),
                                 fontWeight = getWeight()
                             )
                         },
-                        actions = {
+                        navigationIcon = {
                             IconButton(
                                 onClick = {
                                     showLanguageChoice = false
                                 }) {
                                 Icon(
-                                    Icons.Default.Close,
+                                    Icons.Default.ArrowBackIos,
                                     contentDescription = "Close Dialog"
                                 )
                             }
@@ -237,6 +280,325 @@ fun SettingsScreen() {
             }
         }
     }
+
+    if (showAbout) {
+        Dialog(
+            onDismissRequest = { showAbout = false },
+            properties = DialogProperties(
+                dismissOnBackPress = true,
+                usePlatformDefaultWidth = false
+            ),
+        ) {
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        title = {
+                            Text(
+                                text = stringResource(R.string.about),
+                                modifier = Modifier.fillMaxWidth(),
+                                fontWeight = getWeight()
+                            )
+                        },
+                        navigationIcon = {
+                            IconButton(
+                                onClick = {
+                                    showAbout = false
+                                }) {
+                                Icon(
+                                    Icons.Default.ArrowBackIos,
+                                    contentDescription = "Close Dialog"
+                                )
+                            }
+                        },
+                        colors = TopAppBarDefaults.smallTopAppBarColors(
+                            containerColor = getNavColor(),
+                            titleContentColor = getOnSurfaceVariant()
+                        ),
+                    )
+                },
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
+                Box(Modifier.padding(it)) {
+                    AboutScreen()
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AboutScreen() {
+    var showAppDetails by remember {
+        mutableStateOf(false)
+    }
+    Column(
+        modifier = Modifier
+            .padding(10.dp, 10.dp)
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(10.dp))
+            .background(
+                getOnSurface()
+            )
+            .verticalScroll(
+                rememberScrollState()
+            )
+    ) {
+        val builder = StringBuilder()
+        var error = false
+
+        val fields: Array<Field> = VERSION_CODES::class.java.fields
+        for (field in fields) {
+            val fieldName: String = field.name
+            var fieldValue = -1
+            try {
+                fieldValue = field.getInt(Any())
+            } catch (e: Exception) {
+                e.printStackTrace()
+                error = true
+            }
+            if (fieldValue == Build.VERSION.SDK_INT) {
+                builder.append(fieldName)
+            }
+        }
+        if (error) {
+            builder.clear().append(stringResource(R.string.android_version_name_error))
+        }
+        ListItem(
+            headlineText = {
+                Text(
+                    "Android Version",
+                    modifier = Modifier.padding(0.dp, 0.dp),
+                    fontSize = 18.sp
+                )
+            },
+            supportingText = {
+                Text(
+                    Build.VERSION.RELEASE,
+                    modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = Utils
+                    .getBackgroundColor()
+                    .compositeOver(MaterialTheme.colorScheme.background)
+            ),
+            modifier = Modifier
+                .padding(0.dp, 0.dp)
+                .fillMaxWidth()
+        )
+        Divider(
+            modifier = Modifier.padding(10.dp, 2.dp)
+        )
+        ListItem(
+            headlineText = {
+                Text(
+                    stringResource(R.string.android_version_name),
+                    modifier = Modifier.padding(0.dp, 0.dp),
+                    fontSize = 18.sp
+                )
+            },
+            supportingText = {
+                Text(
+                    builder.toString(),
+                    modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
+                    fontSize = 12.sp,
+                    color = if (!error) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f) else MaterialTheme.colorScheme.error
+                )
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = Utils
+                    .getBackgroundColor()
+                    .compositeOver(MaterialTheme.colorScheme.background)
+            ),
+            modifier = Modifier
+                .padding(0.dp, 0.dp)
+                .fillMaxWidth()
+        )
+        Divider(
+            modifier = Modifier.padding(10.dp, 2.dp)
+        )
+        ListItem(
+            headlineText = {
+                Text(
+                    "SDK Version",
+                    modifier = Modifier.padding(0.dp, 0.dp),
+                    fontSize = 18.sp
+                )
+            },
+            supportingText = {
+                Text(
+                    Build.VERSION.SDK_INT.toString(),
+                    modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = Utils
+                    .getBackgroundColor()
+                    .compositeOver(MaterialTheme.colorScheme.background)
+            ),
+            modifier = Modifier
+                .padding(0.dp, 0.dp)
+                .fillMaxWidth()
+        )
+        Divider(
+            modifier = Modifier.padding(10.dp, 2.dp)
+        )
+        ListItem(
+            headlineText = {
+                Text(
+                    stringResource(R.string.phone_model),
+                    modifier = Modifier.padding(0.dp, 0.dp),
+                    fontSize = 18.sp
+                )
+            },
+            supportingText = {
+                Text(
+                    Build.MODEL.uppercase(),
+                    modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = Utils
+                    .getBackgroundColor()
+                    .compositeOver(MaterialTheme.colorScheme.background)
+            ),
+            modifier = Modifier
+                .padding(0.dp, 0.dp)
+                .fillMaxWidth()
+        )
+        Divider(
+            modifier = Modifier.padding(10.dp, 2.dp)
+        )
+        ListItem(
+            headlineText = {
+                Text(
+                    "App Details",
+                    modifier = Modifier.padding(0.dp, 0.dp),
+                    fontSize = 18.sp
+                )
+            },
+            supportingText = {
+                Text(
+                    "App Version: ${BuildConfig.VERSION_NAME}",
+                    modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                )
+            },
+            colors = ListItemDefaults.colors(
+                containerColor = Utils
+                    .getBackgroundColor()
+                    .compositeOver(MaterialTheme.colorScheme.background)
+            ),
+            modifier = Modifier
+                .padding(0.dp, 0.dp)
+                .fillMaxWidth()
+                .clickable(
+                    onClick = {
+                        showAppDetails = true
+                    }
+                )
+        )
+    }
+    if (showAppDetails) {
+        Dialog(
+            onDismissRequest = { showAppDetails = false },
+            properties = DialogProperties(
+                dismissOnBackPress = true,
+                usePlatformDefaultWidth = false
+            ),
+        ) {
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        title = {
+                            Text(
+                                text = stringResource(R.string.about_app),
+                                modifier = Modifier.fillMaxWidth(),
+                                fontWeight = getWeight()
+                            )
+                        },
+                        navigationIcon = {
+                            IconButton(
+                                onClick = {
+                                    showAppDetails = false
+                                }) {
+                                Icon(
+                                    Icons.Default.ArrowBackIos,
+                                    contentDescription = "Close Dialog"
+                                )
+                            }
+                        },
+                        colors = TopAppBarDefaults.smallTopAppBarColors(
+                            containerColor = getNavColor(),
+                            titleContentColor = getOnSurfaceVariant()
+                        ),
+                    )
+                },
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.background)
+            ) {
+                Box(Modifier.padding(it)) {
+                    AboutApp()
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun AboutApp() {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(0.85f)
+            .padding(10.dp, 10.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.app_name),
+            fontSize = 24.sp,
+            fontWeight = FontWeight(500),
+            letterSpacing = 0.1.em,
+        )
+        Text(
+            text = "Version: ${BuildConfig.VERSION_NAME}",
+            fontSize = 16.sp,
+            modifier = Modifier.padding(0.dp, 15.dp, 0.dp, 10.dp),
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+        )
+        Image(
+            painter = painterResource(id = R.drawable.icon),
+            contentDescription = "App Icon",
+            modifier = Modifier
+                .padding(0.dp, 10.dp)
+                .size(150.dp)
+        )
+        Text(
+            text = "\u00A9 ${getYear()} Elisa Johanna Woelk",
+            fontSize = 16.sp,
+            modifier = Modifier.padding(0.dp, 15.dp, 0.dp, 10.dp),
+            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+        )
+    }
+}
+
+fun getYear(): String {
+    val year = Calendar.getInstance().get(Calendar.YEAR)
+    return if (year == 2023) {
+        year.toString()
+    }
+    else "2023 - $year"
 }
 
 @Composable

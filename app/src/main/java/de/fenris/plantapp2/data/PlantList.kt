@@ -14,7 +14,7 @@ class PlantList {
                     "Spathiphyllum wallisii",
                     listOf(Room.BATHROOM, Room.LIVING_ROOM),
                     R.string.water_peace_lily,
-                    R.string.note_empty,
+                    R.string.note_drama_queen,
                     R.string.once_a_week,
                     listOf(
                         WarningSign(R.string.pale_hanging_leaves, R.string.water_more),
@@ -22,7 +22,12 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_peace_lily,
-                    R.drawable.img_plant
+                    listOf(
+                        R.drawable.ph_peace_lily_1,
+                        R.drawable.ph_peace_lily_2,
+                        R.drawable.ph_peace_lily_3,
+                        R.drawable.ph_peace_lily_4
+                    )
                 ),
                 Plant(
                     R.string.spider_plant,
@@ -37,7 +42,15 @@ class PlantList {
                     ),
                     Sensitivity.INDESTRUCTIBLE,
                     R.drawable.img_spider_plant,
-                    R.drawable.img_plant
+                    listOf(
+                        R.drawable.ph_spider_plant_1,
+                        R.drawable.ph_spider_plant_2,
+                        R.drawable.ph_spider_plant_3,
+                        R.drawable.ph_spider_plant_4,
+                        R.drawable.ph_spider_plant_5,
+                        R.drawable.ph_spider_plant_6,
+                        R.drawable.ph_spider_plant_7
+                    )
                 ),
                 Plant(
                     R.string.monstera,
@@ -52,7 +65,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_monstera,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_monstera)
                 ),
                 Plant(
                     R.string.golden_pothos,
@@ -67,7 +80,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_golden_pothos,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_golden_pothos)
                 ),
                 Plant(
                     R.string.pink_orchid,
@@ -82,7 +95,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_pink_orchid,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_pink_moth_orchid)
                 ),
                 Plant(
                     R.string.white_orchid,
@@ -97,7 +110,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_tiny_orchid,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_white_orchid)
                 ),
                 Plant(
                     R.string.spotted_orchid,
@@ -112,10 +125,10 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_spotted_orchid,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_purple_rain_orchid)
                 ),
                 Plant(
-                    R.string.yellow_orchid,
+                    R.string.moth_orchid,
                     "Phalaenopsis 'Jungle Cat Stripes'",
                     listOf(Room.BATHROOM),
                     R.string._150_200ml,
@@ -127,7 +140,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_yellow_orchid,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_jungle_stripes_orchid)
                 ),
                 Plant(
                     R.string.kalanchoe,
@@ -142,7 +155,13 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_kalanchoe,
-                    R.drawable.img_plant
+                    listOf(
+                        R.drawable.ph_kalanchoe_1,
+                        R.drawable.ph_kalanchoe_2,
+                        R.drawable.ph_kalanchoe_3,
+                        R.drawable.ph_kalanchoe_4,
+                        R.drawable.ph_kalanchoe_5
+                    )
                 ),
                 Plant(
                     R.string.asparagus_fern,
@@ -157,7 +176,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_asparagus_fern,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_asparagus_fern)
                 ),
                 Plant(
                     R.string.wandering_jew,
@@ -172,7 +191,17 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_silver_inch_plant,
-                    R.drawable.img_plant
+                    listOf(
+                        R.drawable.ph_tradescantia_1,
+                        R.drawable.ph_tradescantia_2,
+                        R.drawable.ph_tradescantia_3,
+                        R.drawable.ph_tradescantia_4,
+                        R.drawable.ph_tradescantia_5,
+                        R.drawable.ph_tradescantia_6,
+                        R.drawable.ph_tradescantia_7,
+                        R.drawable.ph_tradescantia_8,
+                        R.drawable.ph_tradescantia_9
+                    )
                 ),
                 /* LIVING ROOM */
                 Plant(
@@ -180,7 +209,7 @@ class PlantList {
                     "Ligustrum sinense",
                     listOf(Room.LIVING_ROOM),
                     R.string._200ml,
-                    R.string.note_empty,
+                    R.string.note_drama_queen,
                     R.string.once_a_week,
                     listOf(
                         WarningSign(R.string.droopy_leaves, R.string.water_more),
@@ -189,7 +218,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_bonsai,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_bonsai)
                 ),
                 Plant(
                     R.string.banana,
@@ -204,7 +233,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_banana,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_banana)
                 ),
                 Plant(
                     R.string.snake_plant,
@@ -216,7 +245,10 @@ class PlantList {
                     listOf(),
                     Sensitivity.INDESTRUCTIBLE,
                     R.drawable.img_snake_plant,
-                    R.drawable.img_plant
+                    listOf(
+                        R.drawable.ph_snake_plant_1,
+                        R.drawable.ph_snake_plant_2
+                    )
                 ),
                 Plant(
                     R.string.aloe,
@@ -231,7 +263,10 @@ class PlantList {
                     ),
                     Sensitivity.INDESTRUCTIBLE,
                     R.drawable.img_aloe_vera,
-                    R.drawable.img_plant
+                    listOf(
+                        R.drawable.ph_aloe_very_1,
+                        R.drawable.ph_aloe_very_2
+                    )
                 ),
                 Plant(
                     R.string.false_christmas_cactus,
@@ -245,7 +280,7 @@ class PlantList {
                     ),
                     Sensitivity.INDESTRUCTIBLE,
                     R.drawable.img_false_christmas_cactus,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_false_christmas_cactus)
                 ),
                 Plant(
                     R.string.japanese_woodland_stonecrop,
@@ -259,7 +294,7 @@ class PlantList {
                     ),
                     Sensitivity.INDESTRUCTIBLE,
                     R.drawable.img_japanese_woodland_stonecrop,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_tundra_tornado)
                 ),
                 Plant(
                     R.string.chinese_money_plant,
@@ -273,7 +308,10 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_chinese_money_plant,
-                    R.drawable.img_plant
+                    listOf(
+                        R.drawable.ph_chinese_money_plant_1,
+                        R.drawable.ph_chinese_money_plant_2
+                    )
                 ),
                 Plant(
                     R.string.amaryllis,
@@ -287,21 +325,25 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_amaryllis,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_amaryllis)
                 ),
                 Plant(
                     R.string.fig_cactus,
                     "Opuntia ficus-indica",
                     listOf(Room.LIVING_ROOM),
                     R.string._50ml,
-                    R.string.note_empty,
+                    R.string.note_cactus_spikes,
                     R.string.frequency_none,
                     listOf(
                         WarningSign(R.string.shrivelling_up, R.string.water_more)
                     ),
                     Sensitivity.INDESTRUCTIBLE,
                     R.drawable.img_fig_cactus,
-                    R.drawable.img_plant
+                    listOf(
+                        R.drawable.ph_fig_cactus_1,
+                        R.drawable.ph_fig_cactus_2,
+                        R.drawable.ph_fig_cactus_3
+                    )
                 ),
                 Plant(
                     R.string.argentine_giant,
@@ -315,7 +357,10 @@ class PlantList {
                     ),
                     Sensitivity.INDESTRUCTIBLE,
                     R.drawable.img_argentine_giant,
-                    R.drawable.img_plant
+                    listOf(
+                        R.drawable.ph_argentine_giant,
+                        R.drawable.ph_argentine_giant_2
+                    )
                 ),
                 Plant(
                     R.string.parlor_palm,
@@ -330,7 +375,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_parlor_palm,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_parlor_palm)
                 ),
                 Plant(
                     R.string.calathea,
@@ -345,7 +390,7 @@ class PlantList {
                     ),
                     Sensitivity.HIGH,
                     R.drawable.img_calathea,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_calathea)
                 ),
                 Plant(
                     R.string.bamboo,
@@ -360,7 +405,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_bamboo,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_bamboo)
                 ),
                 Plant(
                     R.string.arrowhead,
@@ -375,7 +420,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_arrowhead,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_arrowhead_plant)
                 ),
                 Plant(
                     R.string.lizard_tail,
@@ -390,7 +435,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_lizard_tail,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_lizard_tail)
                 ),
                 Plant(
                     R.string.moon_valley_pilea,
@@ -404,7 +449,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_moon_valley_pilea,
-                    R.drawable.img_plant
+                    listOf(R.drawable.img_plant)
                 ),
                 Plant(
                     R.string.guzmania_hope,
@@ -418,7 +463,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_hope,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_guzmania)
                 ),
                 Plant(
                     R.string.jade_pothos,
@@ -433,7 +478,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_jade_pothos,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_jade_pothos)
                 ),
                 Plant(
                     R.string.heart_leaf,
@@ -448,7 +493,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_heart_leaf,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_philodendron)
                 ),
                 Plant(
                     R.string.jade_plant,
@@ -462,7 +507,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_jade_plant,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_jade_plant)
                 ),
                 Plant(
                     R.string.clearweed,
@@ -477,7 +522,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_clearweed,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_clearweed)
                 ),
                 Plant(
                     R.string.dracaena,
@@ -492,7 +537,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_dracaena,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_dracaena)
                 ),
                 Plant(
                     R.string.flaming_sword,
@@ -506,7 +551,7 @@ class PlantList {
                     ),
                     Sensitivity.LOW,
                     R.drawable.img_flaming_sword,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_flaming_sword)
                 ),
                 Plant(
                     R.string.rabbits_foot_fern,
@@ -521,7 +566,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_rabbits_foot,
-                    R.drawable.img_plant
+                    listOf(R.drawable.ph_rabbits_foot_fern)
                 ),
             )
         )

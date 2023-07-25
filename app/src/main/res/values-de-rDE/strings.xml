@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--GIESSFREQUENZEN-->
+    <string name="once_a_week">Ein Mal pro Woche</string>
+    <string name="once_in_2_weeks">"Ein Mal alle zwei Wochen"</string>
+    <string name="one_to_two_times_a_week">Ein bis zwei Mal pro Woche</string>
+    <string name="frequency_none">Keine</string>
+
+    <!--PFLANZENNAMEN-->
     <string name="spider_plant">Grünlilie</string>
     <string name="monstera">Fensterblatt</string>
     <string name="golden_pothos">Goldranke</string>
@@ -33,10 +40,10 @@
     <string name="dracaena">Drachenbaum \'Bicolor\'</string>
     <string name="flaming_sword">Flammendes Schwert</string>
     <string name="rabbits_foot_fern">Hasenpfotenfarn</string>
-    <string name="once_a_week">Ein Mal pro Woche</string>
-    <string name="yellow_orchid">Phalaenopsis \'Jungle Cat Stripes\'</string>
-    <string name="water_more">Mehr gießen</string>
-    <string name="water_less">Weniger gießen</string>
+    <string name="moth_orchid">Phalaenopsis \'Jungle Cat Stripes\'</string>
+    <string name="peace_lily">Friedenslilie</string>
+
+    <!-- WARNZEICHEN -->
     <string name="yellowing_leaves">Gelbliche Blätter</string>
     <string name="pale_leaves">Blasse Blätter</string>
     <string name="droopy_leaves">Hängende Blätter</string>
@@ -53,55 +60,66 @@
     <string name="leathery_wrinkled_leaves">Lederige, runzlige Blätter</string>
     <string name="yellowing_wrinkled_leaves">Gelbliche, runzlige Blätter</string>
     <string name="shrivelling_up">Verschrumpelt</string>
-    <string name="once_in_2_weeks">"Ein Mal alle zwei Wochen"</string>
-    <string name="one_to_two_times_a_week">Ein bis zwei Mal pro Woche</string>
-    <string name="spray_with_water">Blätter mit Wasser besprühen</string>
-    <string name="frequency_none">Keine</string>
     <string name="falling_brown_leaves">Abfallende oder braune Blätter</string>
     <string name="black_spots">Schwarze Flecken auf Blättern, ungewöhnliche Menge an abfallenden, gelblichen Blättern</string>
     <string name="black_spot_fungus">Black-spot Pilzbefall - Bitte Bescheid sagen</string>
     <string name="brown_leaves_happen">Braune, trockene Blätter können vorkommen. Ich weiß nicht warum.</string>
-    <string name="pale_leaves_happen">Blasse Blätter können auftreten, ohne dass die Pflanze Wasser braucht, Feuchtigkeit
-        der Erde prüfen
-    </string>
+    <string name="pale_leaves_happen">Blasse Blätter können auftreten, ohne dass die Pflanze Wasser braucht, Feuchtigkeit der Erde prüfen</string>
     <string name="falling_leaves_rotting_stem">Abfallende Blätter, verrottender Stamm</string>
-    <string name="list">Meine Pflanzen</string>
+    <string name="spray_with_water">Blätter mit Wasser besprühen</string>
+    <string name="water_more">Mehr gießen</string>
+    <string name="water_less">Weniger gießen</string>
+
+    <!-- NAVIGATION -->
     <string name="home">Home</string>
+    <string name="list">Meine Pflanzen</string>
+    <string name="tasks">Aufgaben</string>
     <string name="calendar">Kalender</string>
-    <string name="peace_lily">Friedenslilie</string>
+
+    <!-- DETAILS -->
     <string name="rooms">Räume</string>
     <string name="water_amount">Gießmenge</string>
     <string name="water_frequency">Gießhäufigkeit</string>
     <string name="note">Notiz</string>
     <string name="sensitivity">Sensibilität</string>
     <string name="warning_signs">Warnzeichen</string>
+    <string name="note_empty">\"\"</string>
+
+    <!-- RÄUME -->
     <string name="room_all_rooms">Alle Räume</string>
     <string name="room_bathroom">Badezimmer</string>
     <string name="room_living_room">Wohnbereich</string>
     <string name="room_kitchen">Küche</string>
+    <string name="selected_room">Gewählter Raum</string>
+
+    <!-- SENSIBILITÄT -->
     <string name="sensitivity_indestructible">Unzerstörbar</string>
     <string name="sensitivity_low">Niedrig</string>
     <string name="sensitivity_medium">Mittel</string>
     <string name="sensitivity_high">Hoch</string>
-    <string name="tasks">Aufgaben</string>
+
+    <!-- KALENDER -->
     <string name="august">August</string>
     <string name="july">Juli</string>
-    <string name="note_empty">\"\"</string>
+
+    <!-- EINSTELLUNGEN -->
     <string name="settings_title">Einstellungen</string>
-    <string name="language_title">Sprache</string>
+    <string name="language">Sprache</string>
+    <string name="follow_system_language">Systemsprache folgen</string>
+    <string name="switch_on">An</string>
+    <string name="switch_off">Aus</string>
+
+    <!-- AUFGABEN -->
     <string name="task_completed">Abgeschlossen</string>
-    <string name="language_setting">Sprache</string>
     <string name="no_tasks_completed_yet">Noch keine Aufgaben erledigt</string>
     <string name="no_unfinished_tasks">Keine ausstehenden Aufgaben</string>
     <string name="week_one_span_title">29.-31. Juli</string>
     <string name="week_two_span_title">05.-07. August</string>
-    <string name="follow_system_language">Systemsprache folgen</string>
-    <string name="switch_on">An</string>
-    <string name="switch_off">Aus</string>
-    <string name="selected_room">Gewählter Raum</string>
+
+    <!-- GIESSMENGE -->
     <string name="water_peace_lily">"Badezimmer: 500ml\nWohnbereich (grauer Topf): 350&#8211;400ml\nWohnbereich (grüner Topf): 250&#8211;300ml\nWohnbereich (geflochtener Topf): 200ml"</string>
     <string name="water_spider_plant">"Badezimmer: 500ml\nKüche: 100ml\nWohnbereich (schwarzer Topf): 100ml\nWohnbereich (Metalltopf): 100ml\nWohnbereich (Marmortopf): 500ml\nWohnbereich (weißer Topf): 200ml\nWohnbereich (graue Pflanzbox): 200ml &amp; Dropman (Wasserdispenser) auffüllen"</string>
-    <string name="water_kalanchoe">"Badezimmer (Fenster): 100ml\nBadezimmer (graue Pflanzbox): 400ml\nWohnbereich (schwarzes Regal): 100ml\nWohnbereich (grauer Topf, Fenster): 100ml\nWohnbereich (kleiner, roter Topf): 15x mit dem Zerstäuber besprühen"</string>
+    <string name="water_kalanchoe">"Badezimmer (Fenster): 100ml\nBadezimmer (graue Pflanzbox): 400ml\nWohnbereich (schwarzes Regal): 100ml\nWohnbereich (grauer Topf, Fenster): 100ml\nWohnbereich (kleiner, roter Topf): 15 Pumpstöße aus dem Zerstäuber"</string>
     <string name="water_tradescantia">"Badezimmer (Fenster): 150&#8211;200ml\nBadezimmer (Waschbecken): 200ml\nWohnbereich (pinker Topf): 200ml\nWohnbereich (weißer Topf): 200ml\nWohnbereich (grauer Topf, Fenster): 100ml\nWohnbereich (großer, grauer Topf): 300ml\nWohnbereich (Kokosnusstopf): 50&#8211;100ml"</string>
     <string name="_100ml">100ml</string>
     <string name="_150_200ml">150&#8211;200ml</string>
@@ -114,15 +132,21 @@
     <string name="_600ml">600ml</string>
     <string name="_20ml">20ml</string>
     <string name="_400ml">400ml</string>
+
+    <!-- SCHLÜSSELÜBERGABE -->
     <string name="handing_over_the_key">Schlüsselübergabe</string>
     <string name="_when">Wann?</string>
     <string name="from">Von?</string>
     <string name="between_31_07_and_06_08">Zwischen dem 31.07. und dem 06.08.</string>
+
+    <!-- MEINE REISE -->
     <string name="my_trip">Meine Reise</string>
     <string name="return_date">Rückkehrdatum:</string>
     <string name="return_date_details">14.08. (vermutlich mittags)</string>
     <string name="my_trip_para1">Ich habe eventuell keine verlässliche Internetverbindung, also ist es möglich, dass ich Nachrichten nicht direkt beantworten kann. Ein paar Pflanzen sind Drama Queens, also wenn du denkst, dass eine Pflanze stirbt, lies erstmal durch die Notizen.</string>
     <string name="my_trip_para2">Bemerkenswerte Drama Queens sind die Friedenslilien und der Bonsai. Wenn die Durst bekommen, lassen sie ihre Blätter hängen, als ob sie noch nie in ihrem Leben einen Tropfen Wasser gesehen haben. Das haben sie. Sie lügen. Die Pflanzen manipulieren dich. Lass dich nicht hereinlegen.</string>
+
+    <!-- GERÄTE -->
     <string name="tools_co">Geräte &amp; Co.</string>
     <string name="watering_can">Gießkanne:</string>
     <string name="under_the_kitchen_table">Unter dem Küchentisch</string>
@@ -134,5 +158,17 @@
     <string name="it_turns_on_and_off_by_itself_so_don_t_worry_if_it_s_on">Schaltet sich selber an und aus, also keine Sorge falls er an ist.</string>
     <string name="frame_remote">Fernbedienung:</string>
     <string name="measuring_cup">Messbecher:</string>
-
+    <string name="key_return">Rückgabe:</string>
+    <string name="key_return_text">Bitte den Schlüssel in den gepolsterten Umschlag auf dem Küchentisch legen und in meinen Briefkasten werfen.</string>
+    <string name="moisture_meter">Feuchtigkeitssensor:</string>
+    <string name="moisture_meter_details">"(Muss nicht benutzt werden)\nSensor am Topfrand (um Wurzelschäden zu minimieren) tief in die Erde schieben.\nDry: Gießen.\nWet: Nicht gießen.\nMoist: Ein bisschen gießen, etwa &#8531; der, in der Anleitung angegebenen Menge."</string>
+    <string name="about">Info</string>
+    <string name="about_details">Android Version, SDK Version, App Version</string>
+    <string name="phone_model">Gerätemodell</string>
+    <string name="android_version_name_error">Android Versionsname konnte nicht festgestellt werden.</string>
+    <string name="android_version_name">Android Versionsname</string>
+    <string name="note_drama_queen">Sieht aus, als würde sie sterben, wenn durstig</string>
+    <string name="note_orchid_wilting">Blüten könnten verblühen und abfallen. Keine Sorge.</string>
+    <string name="note_cactus_spikes">Nicht anfassen! Kaktus hat kleine, fast durchsichtige Stacheln, die sich nur schwer aus Kleidung rauswaschen lassen und Hautirritationen hervorrufen können.</string>
+    <string name="about_app">Über die App</string>
 </resources>

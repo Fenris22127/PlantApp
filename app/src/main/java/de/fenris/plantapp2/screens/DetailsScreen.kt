@@ -2,13 +2,14 @@ package de.fenris.plantapp2.screens
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Circle
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
@@ -17,10 +18,15 @@ import androidx.compose.material.icons.outlined.Circle
 import androidx.compose.material.icons.outlined.ReportProblem
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material.icons.outlined.WaterDrop
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableIntState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -29,17 +35,26 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import de.fenris.plantapp2.R
 import de.fenris.plantapp2.Utils
 import de.fenris.plantapp2.data.Plant
 import de.fenris.plantapp2.data.WarningSign
 import de.fenris.plantapp2.ui.theme.isAppInDarkTheme
+import de.fenris.plantapp2.viewmodel.test.SliderViewModel
+import de.fenris.plantapp2.viewmodel.test.SliderViewModelFactory
 import kotlinx.coroutines.launch
 
+private const val maxListSize: Int = 3
+
 @Composable
-fun DetailsScreen(plant: Plant) {
+fun DetailsScreen(
+    plant: Plant,
+    viewModel: SliderViewModel = viewModel(factory = SliderViewModelFactory(plant))
+) {
     Column(
         modifier = Modifier
             .padding(10.dp, 5.dp)
@@ -52,7 +67,9 @@ fun DetailsScreen(plant: Plant) {
             horizontalArrangement = Arrangement.Center
         ) {
             ImageSlider(
-                listOf(plant.coverImage, plant.myImage)
+                plant,
+                listOf(plant.coverImage) + plant.myImage,
+                viewModel
             )
         }
         DetailFields(plant)
@@ -61,23 +78,35 @@ fun DetailsScreen(plant: Plant) {
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ImageSlider(images: List<Any>) {
+fun ImageSlider(
+    plant: Plant,
+    images: List<Int>,
+    sliderViewModel: SliderViewModel
+) {
     val pagerState = rememberPagerState(
         initialPage = 0,
         initialPageOffsetFraction = 0f
     ) {
-        2
+        images.size
     }
+    val sizeList = remember { createList(images.size) }
+    val startRange = remember { mutableIntStateOf(0) }
+    val endRange =
+        remember { mutableIntStateOf(if (images.size <= maxListSize) images.size - 1 else maxListSize - 1) }
+    val currentPage = remember { mutableIntStateOf(0) }
     val scope = rememberCoroutineScope()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
             .padding(0.dp, 7.dp, 0.dp, 5.dp)
     ) {
-        Box(modifier = Modifier
-            .width(280.dp)
-            .height(280.dp)) {
+        Box(
+            modifier = Modifier
+                .width(280.dp)
+                .height(280.dp)
+        ) {
             HorizontalPager(
                 state = pagerState,
                 modifier = Modifier
@@ -87,81 +116,222 @@ fun ImageSlider(images: List<Any>) {
                 pageSize = PageSize.Fill
             ) { page ->
                 Image(
-                    painter = painterResource(id = images[page] as Int),
-                    contentDescription = "Plant",
+                    painter = painterResource(id = images[page]),
+                    contentDescription = "${plant.name} #${page + 1}",
                     modifier = Modifier
                         .fillMaxSize()
                 )
             }
-            Box(
-                modifier = Modifier
-                    .offset(if (pagerState.currentPage == 0) -(5).dp else 5.dp, 0.dp)
-                    .fillMaxWidth(0.1f)
-                    .fillMaxHeight(0.1f)
-                    .clip(CircleShape)
-                    .background(Color(0xd9CACACA))
-                    .padding(2.dp, 0.dp, 0.dp, 0.dp)
-                    .align(if (pagerState.currentPage == 0) Alignment.CenterEnd else Alignment.CenterStart)
+            Row(
+                Modifier
+                    .fillMaxSize()
+                    .padding(10.dp),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.Top
             ) {
-                if (pagerState.currentPage == 0) {
-                    IconButton(
-                        onClick = {
-                            scope.launch {
-                                pagerState.animateScrollToPage(
-                                    pagerState.currentPage + 1
-                                )
-                            }
+                Text(
+                    text = "${pagerState.currentPage + 1}/${images.size}",
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(Color(0xFF303030).copy(alpha = 0.5f))
+                        .padding(5.dp, 3.dp),
+                    color = Color.White,
+                    fontSize = 16.sp
+                )
+            }
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxSize(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(
+                    onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(
+                                pagerState.currentPage - 1
+                            )
                         }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.KeyboardArrowRight,
-                            contentDescription = "Go to next image",
-                            modifier = Modifier
-                                .size(24.dp)
-                                .padding(0.dp, 0.dp, 0.dp, 0.dp)
-                        )
-                    }
-                } else {
-                    IconButton(
-                        onClick = {
-                            scope.launch {
-                                pagerState.animateScrollToPage(
-                                    pagerState.currentPage - 1
-                                )
-                            }
+
+                        currentPage.intValue = currentPage.intValue - 1
+                        if (currentPage.intValue < startRange.intValue) {
+                            startRange.intValue -= 1
+                            endRange.intValue -= 1
                         }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.KeyboardArrowLeft,
-                            contentDescription = "Go to previous image",
-                            modifier = Modifier
-                                .size(24.dp)
-                                .padding(0.dp, 0.dp, 2.dp, 0.dp)
+                        adjustList(sizeList, currentPage.intValue, startRange, endRange)
+                    },
+                    modifier = Modifier
+                        .alpha(if (pagerState.currentPage == 0) 0f else 1f)
+                        .offset(5.dp, 0.dp)
+                        .size(28.dp)
+                        .clip(CircleShape)
+                        .background(
+                            if (pagerState.currentPage == 0) Color.Transparent else Color(
+                                0xd9CACACA
+                            )
                         )
-                    }
+                        .padding(0.dp, 0.dp, 2.dp, 0.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowLeft,
+                        contentDescription = "Go to previous image",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .padding(0.dp, 0.dp, 0.dp, 0.dp)
+                    )
+                }
+                IconButton(
+                    onClick = {
+                        scope.launch {
+                            pagerState.animateScrollToPage(
+                                pagerState.currentPage + 1
+                            )
+                        }
+
+                        currentPage.intValue = currentPage.intValue + 1
+                        if (currentPage.intValue > endRange.intValue) {
+                            startRange.intValue += 1
+                            endRange.intValue += 1
+                        }
+                        adjustList(sizeList, currentPage.intValue, startRange, endRange)
+                    },
+                    modifier = Modifier
+                        .alpha(if (pagerState.currentPage == images.size - 1) 0f else 1f)
+                        .offset((-5).dp, 0.dp)
+                        .size(28.dp)
+                        .clip(CircleShape)
+                        .background(
+                            if (pagerState.currentPage == images.size - 1) Color.Transparent else Color(
+                                0xd9CACACA
+                            )
+                        )
+                        .padding(0.dp, 0.dp, 0.dp, 0.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowRight,
+                        contentDescription = "Go to next image",
+                        modifier = Modifier
+                            .size(24.dp)
+                            .padding(0.dp, 0.dp, 0.dp, 0.dp)
+                    )
                 }
             }
         }
-        Row(
+        LazyRow(
             modifier = Modifier
                 .padding(8.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
         ) {
-            Icon(
-                imageVector = (if (pagerState.currentPage == 0) Icons.Filled.Circle else Icons.Outlined.Circle),
-                contentDescription = "Image 1 Display State",
-                modifier = Modifier
-                    .size(18.dp)
-                    .padding(0.dp, 0.dp, 5.dp, 0.dp)
-            )
-            Icon(
-                imageVector = (if (pagerState.currentPage == 0) Icons.Outlined.Circle else Icons.Filled.Circle),
-                contentDescription = "Image 2 Display State",
-                modifier = Modifier
-                    .size(18.dp)
-                    .padding(5.dp, 0.dp, 0.dp, 0.dp)
-            )
+            itemsIndexed(images) { index, _ ->
+                println("Index $index")
+                if (sizeList[index] != 3) {
+                    GetCircle(
+                        circleNr = index,
+                        currentPage = pagerState.currentPage,
+                        sizeList = sizeList
+                    )
+                }
+            }
         }
     }
+}
+
+fun adjustList(
+    list: MutableList<Int>,
+    currentPage: Int,
+    startRange: MutableIntState,
+    endRange: MutableIntState
+): MutableList<Int> {
+    var adjustingEndIndex = endRange.intValue
+    var adjustingStartIndex = startRange.intValue
+    list[currentPage] = 0
+    if (adjustingEndIndex + 1 < list.size) {
+        list[adjustingEndIndex + 1] = 1
+        adjustingEndIndex += 1
+    }
+    if (adjustingEndIndex + 1 < list.size) {
+        list[adjustingEndIndex + 1] = 2
+        adjustingEndIndex += 1
+    }
+    for (j in adjustingEndIndex + 1 until list.size) {
+        list[j] = 3
+    }
+    if (adjustingStartIndex - 1 >= 0) {
+        list[adjustingStartIndex - 1] = 1
+        adjustingStartIndex -= 1
+    }
+    if (adjustingStartIndex - 1 >= 0) {
+        list[adjustingStartIndex - 1] = 2
+        adjustingStartIndex -= 1
+    }
+    for (j in adjustingEndIndex + 1 until list.size) {
+        list[j] = 3
+    }
+    for (j in adjustingStartIndex - 1 downTo 0) {
+        list[j] = 3
+    }
+    return list
+}
+
+fun createList(listSize: Int): MutableList<Int> {
+    val sizeList = mutableListOf(0)
+    if (listSize <= maxListSize) {
+        for (i in 1..listSize) {
+            sizeList.add(0)
+        }
+    }
+    if (listSize == maxListSize + 1) {
+        for (i in 1 until maxListSize) {
+            sizeList.add(0)
+        }
+        sizeList.add(1)
+    }
+    if (listSize == maxListSize + 2) {
+        for (i in 1 until maxListSize) {
+            sizeList.add(0)
+        }
+        sizeList.add(1)
+        sizeList.add(2)
+    }
+    if (listSize >= maxListSize + 3) {
+        for (i in 1 until maxListSize) {
+            sizeList.add(0)
+        }
+        sizeList.add(1)
+        sizeList.add(2)
+        for (i in maxListSize + 2 until listSize) {
+            sizeList.add(3)
+        }
+    }
+    return sizeList
+}
+
+@Composable
+fun GetCircle(circleNr: Int, currentPage: Int, sizeList: MutableList<Int>) {
+    Icon(
+        imageVector = (getCircleIcon(currentPage, circleNr, sizeList)),
+        contentDescription = "Image 1 Display State",
+        modifier = Modifier
+            .size(
+                getCircleSize(circleNr, sizeList)
+            )
+            .padding(0.dp, 0.dp, 5.dp, 0.dp),
+        tint = MaterialTheme.colorScheme.onSurface,
+    )
+}
+
+fun getCircleSize(circleNr: Int, sizeList: MutableList<Int>): Dp {
+    return when (sizeList[circleNr]) {
+        1 -> 14.dp
+        2 -> 10.dp
+        else -> 18.dp
+    }
+}
+
+fun getCircleIcon(currentPage: Int, circleNr: Int, sizeList: MutableList<Int>): ImageVector {
+    return if (currentPage == circleNr || sizeList[circleNr] == 2) Icons.Filled.Circle
+    else Icons.Outlined.Circle
 }
 
 @Composable

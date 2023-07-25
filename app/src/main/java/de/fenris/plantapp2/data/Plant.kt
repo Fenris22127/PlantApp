@@ -10,5 +10,5 @@ data class Plant(
     val warningSigns: List<WarningSign>,
     val sensitivity: Sensitivity,
     val coverImage: Int,
-    val myImage: Int
+    val myImage: List<Int>,
 )

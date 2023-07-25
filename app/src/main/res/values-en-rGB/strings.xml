@@ -1,5 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--WATERING FREQUENCIES-->
+    <string name="once_in_2_weeks">Once every two weeks</string>
+    <string name="one_to_two_times_a_week">1–2 times a week</string>
+    <string name="once_a_week">Once a week</string>
+    <string name="frequency_none">None</string>
+
+    <!--PLANT NAMES-->
     <string name="peace_lily">Peace Lily</string>
     <string name="monstera">Swiss Cheese Plant</string>
     <string name="pink_orchid">Pink Moth Orchid</string>
@@ -32,8 +39,11 @@
     <string name="dracaena">Dracaena \'Bicolor\'</string>
     <string name="flaming_sword">Flaming Sword Plant</string>
     <string name="rabbits_foot_fern">Rabbit\'s Foot Fern</string>
-    <string name="once_a_week">Once a week</string>
-    <string name="yellow_orchid">Moth Orchid \'Jungle Cat Stripes\'</string>
+    <string name="spider_plant">Spider Plant</string>
+    <string name="golden_pothos">Golden Pothos</string>
+    <string name="moth_orchid">Moth Orchid \'Jungle Cat Stripes\'</string>
+
+    <!-- WARNING SIGNS -->
     <string name="water_more">Water more</string>
     <string name="water_less">Water less</string>
     <string name="yellowing_leaves">Yellowing leaves</string>
@@ -52,51 +62,61 @@
     <string name="leathery_wrinkled_leaves">Leathery, wrinkled leaves</string>
     <string name="yellowing_wrinkled_leaves">Yellowing, wrinkled leaves</string>
     <string name="shrivelling_up">Shrivelling up</string>
-    <string name="once_in_2_weeks">Once every two weeks</string>
-    <string name="one_to_two_times_a_week">1–2 times a week</string>
     <string name="spray_with_water">Spray leaves with water</string>
-    <string name="frequency_none">None</string>
     <string name="falling_brown_leaves">Falling or brown leaves</string>
     <string name="black_spots">Black spots on leaves, unusual amount of yellowing, falling leaves</string>
     <string name="black_spot_fungus">Black-spot fungus - let me know</string>
     <string name="brown_leaves_happen">Brown, dry leaves may occur, I don\'t know why</string>
     <string name="pale_leaves_happen">Pale leaves may occur without needing water, check soil moisture</string>
     <string name="falling_leaves_rotting_stem">Falling leaves, rotting stem</string>
-    <string name="spider_plant">Spider Plant</string>
-    <string name="golden_pothos">Golden Pothos</string>
+
+    <!-- NAVIGATION -->
     <string name="home">Home</string>
     <string name="list">My Plants</string>
     <string name="tasks">Tasks</string>
     <string name="calendar">Calendar</string>
+
+    <!-- DETAILS -->
     <string name="rooms">Rooms</string>
     <string name="water_amount">Water Amount</string>
     <string name="water_frequency">Water Frequency</string>
     <string name="note">Note</string>
     <string name="sensitivity">Sensitivity</string>
     <string name="warning_signs">Warning Signs</string>
+    <string name="note_empty">\"\"</string>
+
+    <!-- ROOMS -->
     <string name="room_all_rooms">All Rooms</string>
     <string name="room_bathroom">Bathroom</string>
     <string name="room_living_room">Living Room</string>
     <string name="room_kitchen">Kitchen</string>
+
+    <!-- SENSITIVITY -->
     <string name="sensitivity_indestructible">Indestructible</string>
     <string name="sensitivity_low">Low</string>
     <string name="sensitivity_medium">Medium</string>
     <string name="sensitivity_high">High</string>
+    <string name="selected_room">Selected room</string>
+
+    <!-- CALENDAR -->
     <string name="august">August</string>
     <string name="july">July</string>
-    <string name="note_empty">\"\"</string>
+
+    <!-- SETTINGS -->
     <string name="settings_title">Settings</string>
-    <string name="language_title">Language</string>
+    <string name="language">Language</string>
+    <string name="follow_system_language">Follow System Language</string>
+    <string name="switch_on">On</string>
+    <string name="switch_off">Off</string>
+
+    <!-- TASKS -->
     <string name="task_completed">Completed</string>
-    <string name="language_setting">Language</string>
     <string name="no_tasks_completed_yet">No tasks completed yet</string>
     <string name="no_unfinished_tasks">No unfinished tasks</string>
     <string name="week_one_span_title">29.-31. July</string>
     <string name="week_two_span_title">05.-07. August</string>
-    <string name="follow_system_language">Follow System Language</string>
-    <string name="switch_on">On</string>
-    <string name="switch_off">Off</string>
-    <string name="selected_room">Selected room</string>
+
+    <!-- WATERING AMOUNTS -->
     <string name="water_peace_lily">"Bathroom: 500ml\nLiving room (grey pot): 350&#8211;400ml\nLiving room (green pot): 250&#8211;300ml\nLiving room (woven pot): 200ml"</string>
     <string name="water_spider_plant">"Bathroom: 500ml\nKitchen: 100ml\nLiving room (black pot): 100ml\nLiving room (metal pot): 100ml\nLiving room (marble pot): 500ml\nLiving room (white pot): 200ml\nLiving room (grey plant box): 200ml &amp; fill up the Dropman (water dispenser)"</string>
     <string name="water_kalanchoe">"Bathroom (window): 100ml\nBathroom (grey plant box): 400ml\nLiving room (black shelf): 100ml\nLiving room (grey pot, window): 100ml\nLiving room (small red cup): 15 pumps from the spray bottle"</string>
@@ -112,25 +132,43 @@
     <string name="_600ml">600ml</string>
     <string name="_20ml">20ml</string>
     <string name="_400ml">400ml</string>
+
+    <!-- KEY HANDOVER -->
     <string name="handing_over_the_key">Handing over the Key</string>
     <string name="_when">When?</string>
     <string name="from">From?</string>
     <string name="between_31_07_and_06_08">Between 31.07. and 06.08.</string>
+
+    <!-- MY TRIP -->
     <string name="my_trip">My Trip</string>
     <string name="return_date">Return Date:</string>
-    <string name="return_date_details">14.08. (probably around midday)</string>
+    <string name="return_date_details">14.08. (probably late)</string>
     <string name="my_trip_para1">I might not have reliable internet access, so I might not be able to respond to messages quickly. Some plants are drama queens so if you  think a plant is dying, check the notes first.</string>
     <string name="my_trip_para2">Notable drama queens are the Peace Lilies and the Bonsai. If they are running low on water, they will let their leaves hang like they\'ve never seen a drop of water in their whole life. They have. They are lying. The plants are manipulating you. Don\'t fall for it.</string>
+
+    <!-- TOOLS -->
     <string name="tools_co">Tools &amp; Co.</string>
     <string name="watering_can">Watering Can:</string>
     <string name="under_the_kitchen_table">Under the kitchen table</string>
-    <string name="spray_bottle">Spray Bottle:</string>
     <string name="watering_can_details">It\'s a 5l can, so it\'s heavy when full. It fits under the kitchen tap if you place it with the spout facing the top right corner.</string>
+    <string name="spray_bottle">Spray Bottle:</string>
     <string name="on_the_kitchen_table">On the kitchen table</string>
     <string name="instructions">Instructions:</string>
     <string name="frame">Frame:</string>
     <string name="it_turns_on_and_off_by_itself_so_don_t_worry_if_it_s_on">It turns on and off by itself, so don\'t worry if it\'s on.</string>
     <string name="frame_remote">Frame Remote:</string>
     <string name="measuring_cup">Measuring Cup:</string>
-
+    <string name="key_return">Return:</string>
+    <string name="key_return_text">Please place the key in the padded envelope on the kitchen table and put it in the mailbox.</string>
+    <string name="moisture_meter">Moisture Meter:</string>
+    <string name="moisture_meter_details">"(You don't have to use this)\nPush the meter at the edge of the pot (to avoid root damage) deep into the soil.\nDry: water the plant.\nWet: don\'t water the plant.\nMoist: water the plant a bit, about &#8531; the amount of water specified in its instructions."</string>
+    <string name="about">About</string>
+    <string name="about_details">Android version, SDK version, App version</string>
+    <string name="phone_model">Phone Model</string>
+    <string name="android_version_name_error">Could not determine Android Version Name</string>
+    <string name="android_version_name">Android Version Name</string>
+    <string name="note_drama_queen">Looks like it\'s dying when thirsty</string>
+    <string name="note_orchid_wilting">Flowers might slowly wilt and fall off. Don\'t worry about it.</string>
+    <string name="note_cactus_spikes">Don\'t touch! Cactus has tiny, nearly invisible spikes that are difficult to wash out of clothes and might cause skin irritations.</string>
+    <string name="about_app">About App</string>
 </resources>

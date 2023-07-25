@@ -1,7 +1,7 @@
 package de.fenris.plantapp2.viewmodel
 
-import androidx.compose.runtime.Composable
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import de.fenris.plantapp2.data.Plant
 import de.fenris.plantapp2.data.PlantList
@@ -11,13 +11,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class AppViewModel : ViewModel() {
+class AppViewModel(application: Application) : AndroidViewModel(application) {
     private val _uiState = MutableStateFlow(AppUiState())
     val uiState: StateFlow<AppUiState> = _uiState.asStateFlow()
     private var allPlants: List<Plant> = emptyList()
-    /*val settingsOpen: Boolean = false,
-    val selectedRoom: Room = Room.ALL_ROOMS,
-    val plantDetailsOpen: Boolean = false,*/
+
     init {
         fetchPlantListData()
     }
@@ -57,12 +55,14 @@ class AppViewModel : ViewModel() {
     }
 
     private fun fetchPlantListData() {
+
         viewModelScope.launch {
             val plantList = PlantList.instance
             if (plantList.allPlants.isEmpty()) {
                 plantList.setData()
             }
-            allPlants = plantList.allPlants.sortedBy { it.name }
+            allPlants =
+                plantList.allPlants.sortedBy { getApplication<Application>().resources.getString(it.name) }
             _uiState.value =
                 _uiState.value.copy(plantList = allPlants)
         }
