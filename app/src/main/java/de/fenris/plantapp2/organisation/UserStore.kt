@@ -15,12 +15,18 @@ class UserStore(private val context: Context) {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore("settings")
         private val PREF_LANGUAGE = stringPreferencesKey("pref_language")
         private val PREF_DARK_MODE = booleanPreferencesKey("pref_dark_mode")
+        private val NULLABLE_DARK_MODE = booleanPreferencesKey("nullable_dark_mode")
         private val THEME_SET_BY_USER = booleanPreferencesKey("theme_set_by_user")
     }
 
     val getDarkModePreference: Flow<Boolean> = context.dataStore.data.map { preferences ->
         preferences[PREF_DARK_MODE] ?: true
     }
+
+    val getUserChoiceTheme: Flow<Boolean?> = context.dataStore.data
+        .map { preferences ->
+            preferences[NULLABLE_DARK_MODE]
+        }
 
     val getLanguagePreference: Flow<String> = context.dataStore.data.map { preferences ->
         preferences[PREF_LANGUAGE] ?: ""
@@ -33,6 +39,12 @@ class UserStore(private val context: Context) {
     suspend fun saveDarkModePreference(token: Boolean) {
         context.dataStore.edit { preferences ->
             preferences[PREF_DARK_MODE] = token
+        }
+    }
+
+    suspend fun saveUserChoiceTheme(token: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[NULLABLE_DARK_MODE] = token
         }
     }
 

@@ -65,8 +65,6 @@ fun HomeScreen() {
                 .fillMaxSize()
                 .verticalScroll(scrollState)
         ) {
-            //SliderTest()
-
             GetKeyHandover()
             Spacer(modifier = Modifier.height(20.dp))
             GetInfo()
@@ -80,155 +78,6 @@ fun HomeScreen() {
         }
     }
 }
-/*val maxListSize: Int = 3
-@Composable
-fun SliderTest(
-) {
-    val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-    val sizeList = remember { createList(list.size) }
-    val startRange = remember { mutableIntStateOf(0) }
-    val endRange = remember { mutableIntStateOf(if (list.size < maxListSize) list.size - 1 else maxListSize - 1) }
-    val currentPage = remember { mutableIntStateOf(0) }
-
-    Text(text = sizeList.toString())
-    Text(text = "Position: ${currentPage.intValue}")
-    Text(text = "Start: ${startRange.intValue}")
-    Text(text = "End: ${endRange.intValue}")
-
-    Row {
-        Button(
-            onClick = {
-                currentPage.intValue = currentPage.intValue - 1
-                if(currentPage.intValue < startRange.intValue) {
-                    startRange.intValue -= 1
-                    endRange.intValue -= 1
-                }
-                println(sizeList)
-                adjustList(sizeList, currentPage, startRange, endRange)
-                      },
-            enabled = currentPage.intValue > 0,
-            content = {
-                Text(text = "Previous")
-            }
-        )
-        Button(
-            onClick = {
-                currentPage.intValue = currentPage.intValue + 1
-                if(currentPage.intValue > endRange.intValue) {
-                    startRange.intValue += 1
-                    endRange.intValue += 1
-                }
-                println(sizeList)
-                adjustList(sizeList, currentPage, startRange, endRange)
-                      },
-            enabled = currentPage.intValue < list.size - 1,
-            content = {
-                Text(text = "Next")
-            }
-        )
-    }
-
-    LazyRow(modifier = Modifier
-        .padding(8.dp).fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ) {
-        itemsIndexed(list) { index, _ ->
-            if (sizeList[index] != 3) {
-                GetCircle(circleNr = index, currentPage = currentPage.intValue, sizeList =  sizeList)
-            }
-        }
-    }
-
-}
-
-fun adjustList(list: MutableList<Int>, currentPage: MutableIntState, startRange: MutableIntState, endRange: MutableIntState) : MutableList<Int> {
-    var adjustingEndIndex = endRange.intValue
-    var adjustingStartIndex = startRange.intValue
-    list[currentPage.intValue] = 0
-    if (adjustingEndIndex + 1 < list.size) {
-        list[adjustingEndIndex + 1] = 1
-        adjustingEndIndex += 1
-    }
-    if (adjustingEndIndex + 1 < list.size) {
-        list[adjustingEndIndex + 1] = 2
-        adjustingEndIndex += 1
-    }
-    for (j in adjustingEndIndex + 1 until list.size) {
-        list[j] = 3
-    }
-    if (adjustingStartIndex - 1 >= 0) {
-        list[adjustingStartIndex - 1] = 1
-        adjustingStartIndex -= 1
-    }
-    if (adjustingStartIndex - 1 >= 0) {
-        list[adjustingStartIndex - 1] = 2
-        adjustingStartIndex -= 1
-    }
-    for (j in adjustingEndIndex + 1 until list.size) {
-        list[j] = 3
-    }
-    for (j in adjustingStartIndex - 1 downTo 0) {
-        list[j] = 3
-    }
-    println("List: $list")
-    return list
-}
-
-fun createList(listSize : Int) : MutableList<Int> {
-    val sizeList = mutableListOf(0)
-    if (listSize == maxListSize) sizeList.fill(0)
-    if (listSize == maxListSize + 1) {
-        for (i in 1 until maxListSize) {
-            sizeList.add(0)
-        }
-        sizeList.add(1)
-    }
-    if (listSize == maxListSize + 2) {
-        for (i in 1 until maxListSize) {
-            sizeList.add(0)
-        }
-        sizeList.add(1)
-        sizeList.add(2)
-    }
-    if (listSize >= maxListSize + 3) {
-        for (i in 1 until maxListSize) {
-            sizeList.add(0)
-        }
-        sizeList.add(1)
-        sizeList.add(2)
-        for (i in maxListSize + 2 until listSize) {
-            sizeList.add(3)
-        }
-    }
-    return sizeList
-}
-@Composable
-fun GetCircle(circleNr : Int, currentPage : Int, sizeList : MutableList<Int>) {
-    androidx.compose.material.Icon(
-        imageVector = (getCircleIcon(currentPage, circleNr, sizeList)),
-        contentDescription = "Image 1 Display State",
-        modifier = Modifier
-            .size(
-                getCircleSize(circleNr, sizeList)
-            )
-            .padding(0.dp, 0.dp, 5.dp, 0.dp),
-        tint = MaterialTheme.colorScheme.onSurface,
-    )
-}
-
-fun getCircleSize(circleNr: Int, sizeList: MutableList<Int>): Dp {
-    return when(sizeList[circleNr]) {
-        1 -> 14.dp
-        2 -> 10.dp
-        else -> 18.dp
-    }
-}
-
-fun getCircleIcon(currentPage : Int, circleNr: Int, sizeList: MutableList<Int>): ImageVector {
-    return if (currentPage == circleNr || sizeList[circleNr] == 2 ) Icons.Filled.Circle
-    else Icons.Outlined.Circle
-}*/
 
 @Composable
 fun GetKeyHandover() {
@@ -647,11 +496,11 @@ fun FlipCard(maxScroll: MutableIntState, scrollState: ScrollState) {
 
     val rotation by animateFloatAsState(
         targetValue = if (rotated) 180f else 0f,
-        animationSpec = tween(500, easing = FastOutSlowInEasing)
+        animationSpec = tween(500, easing = FastOutSlowInEasing), label = ""
     )
     val backOpacity by animateFloatAsState(
         targetValue = if (rotated) 1f else 0f,
-        animationSpec = tween(500, easing = FastOutSlowInEasing)
+        animationSpec = tween(500, easing = FastOutSlowInEasing), label = ""
     )
 
     Box(
@@ -774,9 +623,3 @@ fun FlipCard(maxScroll: MutableIntState, scrollState: ScrollState) {
         }
     }
 }
-
-/*@Composable
-@Preview(showBackground = true)
-fun HomeScreenPreview() {
-    HomeScreen()
-}*/

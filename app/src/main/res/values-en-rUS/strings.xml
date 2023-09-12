@@ -120,7 +120,7 @@
     <string name="water_peace_lily">"Bathroom: 500ml\nLiving room (grey pot): 350&#8211;400ml\nLiving room (green pot): 250&#8211;300ml\nLiving room (woven pot): 200ml"</string>
     <string name="water_spider_plant">"Bathroom: 500ml\nKitchen: 100ml\nLiving room (black pot): 100ml\nLiving room (metal pot): 100ml\nLiving room (marble pot): 500ml\nLiving room (white pot): 200ml\nLiving room (grey plant box): 200ml &amp; fill up the Dropman (water dispenser)"</string>
     <string name="water_kalanchoe">"Bathroom (window): 100ml\nBathroom (grey plant box): 400ml\nLiving room (black shelf): 100ml\nLiving room (grey pot, window): 100ml\nLiving room (small red cup): 15 pumps from the spray bottle"</string>
-    <string name="water_tradescantia">"Bathroom (window): 150&#8211;200ml\nBathroom (sink): 200ml\nLiving room (pink pot): 200ml\nLiving room (white pot): 200ml\nLiving room (grey pot, window): 100ml\nLiving room (large, grey pot): 300ml\nLiving room (coconut pot): 50&#8211;100ml"</string>
+    <string name="water_tradescantia">"Bathroom (window): 150&#8211;200ml\nBathroom (sink): 200ml\nLiving room (pink pot): 200ml\nLiving room (white pot, shelf): 200ml\n\nLiving room (white pot): 200mlLiving room (black shelf, grey pot): 200ml\nLiving room (grey pot, window): 100ml\nLiving room (large, grey pot): 300ml\nLiving room (coconut pot): 50&#8211;100ml"</string>
     <string name="_100ml">100ml</string>
     <string name="_150_200ml">150&#8211;200ml</string>
     <string name="_50ml">50ml</string>

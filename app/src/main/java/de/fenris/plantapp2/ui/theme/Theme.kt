@@ -54,14 +54,29 @@ fun isAppInDarkTheme(): Boolean {
     val context = LocalContext.current
     val store = UserStore(context)
 
-    val darkModePref = store.getDarkModePreference.collectAsState(initial = true)
+    val isDark = isSystemInDarkTheme()
+    val darkModePref = store.getDarkModePreference.collectAsState(initial = isDark)
     val themeSetByUser = store.getThemeSetByUser.collectAsState(initial = false)
+
     return if (!themeSetByUser.value) {
         isSystemInDarkTheme()
     } else {
         darkModePref.value
     }
+}
 
+@Composable
+fun isAppInDarkTheme2(): Boolean? {
+    val context = LocalContext.current
+    val store = UserStore(context)
+
+    val darkModePref = store.getUserChoiceTheme.collectAsState(initial = null)
+
+    return if (darkModePref.value != null) {
+        darkModePref.value!!
+    } else {
+        null
+    }
 }
 
 @Composable

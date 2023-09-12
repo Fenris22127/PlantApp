@@ -38,22 +38,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import de.fenris.plantapp2.R
 import de.fenris.plantapp2.Utils
 import de.fenris.plantapp2.data.Plant
 import de.fenris.plantapp2.data.WarningSign
 import de.fenris.plantapp2.ui.theme.isAppInDarkTheme
-import de.fenris.plantapp2.viewmodel.test.SliderViewModel
-import de.fenris.plantapp2.viewmodel.test.SliderViewModelFactory
 import kotlinx.coroutines.launch
 
 private const val maxListSize: Int = 3
 
 @Composable
 fun DetailsScreen(
-    plant: Plant,
-    viewModel: SliderViewModel = viewModel(factory = SliderViewModelFactory(plant))
+    plant: Plant
 ) {
     Column(
         modifier = Modifier
@@ -68,8 +64,7 @@ fun DetailsScreen(
         ) {
             ImageSlider(
                 plant,
-                listOf(plant.coverImage) + plant.myImage,
-                viewModel
+                listOf(plant.coverImage) + plant.myImage
             )
         }
         DetailFields(plant)
@@ -80,8 +75,7 @@ fun DetailsScreen(
 @Composable
 fun ImageSlider(
     plant: Plant,
-    images: List<Int>,
-    sliderViewModel: SliderViewModel
+    images: List<Int>
 ) {
     val pagerState = rememberPagerState(
         initialPage = 0,
@@ -93,7 +87,7 @@ fun ImageSlider(
     val startRange = remember { mutableIntStateOf(0) }
     val endRange =
         remember { mutableIntStateOf(if (images.size <= maxListSize) images.size - 1 else maxListSize - 1) }
-    val currentPage = remember { mutableIntStateOf(0) }
+    val currentPage = remember { mutableIntStateOf(pagerState.currentPage) }
     val scope = rememberCoroutineScope()
 
     Column(
@@ -121,6 +115,16 @@ fun ImageSlider(
                     modifier = Modifier
                         .fillMaxSize()
                 )
+                if (page < startRange.intValue) {
+                    startRange.intValue -= 1
+                    endRange.intValue -= 1
+                }
+                if (page > endRange.intValue) {
+                    startRange.intValue += 1
+                    endRange.intValue += 1
+                }
+                currentPage.intValue = page
+                adjustList(sizeList, page, startRange, endRange)
             }
             Row(
                 Modifier

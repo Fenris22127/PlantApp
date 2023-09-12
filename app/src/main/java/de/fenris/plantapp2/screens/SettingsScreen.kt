@@ -48,36 +48,26 @@ import de.fenris.plantapp2.ui.theme.getOnSurface
 import de.fenris.plantapp2.ui.theme.getOnSurfaceVariant
 import de.fenris.plantapp2.ui.theme.getSurfaceHighest
 import de.fenris.plantapp2.ui.theme.isAppInDarkTheme
+import de.fenris.plantapp2.ui.theme.isAppInDarkTheme2
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import java.lang.reflect.Field
 import java.util.*
 
 var languages = emptyList<Language>()
 
-fun getLanguages(context: Context): List<Language> {
-    val system = Language(
-        context.getString(R.string.follow_system_language),
-        "Follow System",
-        "system",
-        "system"
-    )
+fun getLanguageList(): List<Language> {
     val german = Language("Deutsch (Deutschland)", "German (Germany)", "de", "de-rDE")
     val englishGB =
         Language("English (United Kingdom)", "English (United Kingdom)", "en-GB", "en-rGB")
     val englishUS =
         Language("English (United States)", "English (United States)", "en-US", "en-rUS")
-    return if (Build.VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
-        listOf(system, german, englishGB, englishUS)
-    } else {
-        listOf(german, englishGB, englishUS)
-    }
+    return listOf(german, englishGB, englishUS)
 }
 
 var chosenLanguage: String =
-    if (Build.VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) "system" else "en-GB"
+    if (LocaleListCompat.getDefault()[0]?.language == "de") "de" else "en-GB"
 var languagePref: State<String> = mutableStateOf(chosenLanguage)
 
 fun Context.findActivity(): Activity? = when (this) {
@@ -91,13 +81,12 @@ fun Context.findActivity(): Activity? = when (this) {
 fun SettingsScreen() {
     val context = LocalContext.current
     val store = UserStore(context)
-
-    val darkModePref = store.getDarkModePreference.collectAsState(isSystemInDarkTheme())
-    val themeSetByUser = store.getDarkModePreference.collectAsState(initial = false)
+    val darkModePref = store.getUserChoiceTheme.collectAsState(initial = isAppInDarkTheme2())
+    val themeSetByUser = store.getThemeSetByUser.collectAsState(initial = false)
 
     languagePref = store.getLanguagePreference.collectAsState(initial = chosenLanguage)
 
-    languages = getLanguages(context)
+    languages = getLanguageList()
     var showLanguageChoice by remember {
         mutableStateOf(false)
     }
@@ -130,11 +119,7 @@ fun SettingsScreen() {
             },
             supportingText = {
                 Text(
-                    if (languagePref.value == "system" || languagePref.value == "") {
-                        stringResource(id = R.string.follow_system_language)
-                    } else {
-                        languages.first { it.languageTag == languagePref.value }.language
-                    },
+                    languages.first { it.languageTag == chosenLanguage }.language,
                     modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
                     fontSize = 12.sp,
                     color = MaterialTheme.colorScheme.secondary
@@ -172,17 +157,20 @@ fun SettingsScreen() {
                     },
                     modifier = Modifier.padding(0.dp, 5.dp, 10.dp, 0.dp),
                     fontSize = 12.sp,
-                    color = if (isAppInDarkTheme()) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                    color = if (isAppInDarkTheme()) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurface.copy(
+                        alpha = 0.6f
+                    )
                 )
             },
             trailingContent = {
                 Switch(
-                    checked = darkModePref.value,
+                    checked = if (darkModePref.value != null) darkModePref.value!! else isSystemInDarkTheme(),
                     onCheckedChange = {
                         darkModeChoice = it
                         CoroutineScope(Dispatchers.IO).launch {
                             if (!themeSetByUser.value) store.saveThemeSetByUser(true)
                             store.saveDarkModePreference(darkModeChoice)
+                            store.saveUserChoiceTheme(darkModeChoice)
                         }
                     },
                     colors = SwitchDefaults.colors(
@@ -597,8 +585,7 @@ fun getYear(): String {
     val year = Calendar.getInstance().get(Calendar.YEAR)
     return if (year == 2023) {
         year.toString()
-    }
-    else "2023 - $year"
+    } else "2023 - $year"
 }
 
 @Composable
@@ -666,7 +653,7 @@ fun LanguageSelection(store: UserStore) {
                         )
                     }
                     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.End) {
-                        if (languagePref.value == language.languageTag || (languagePref.value == "" && language.languageTag == "system")) {
+                        if (languagePref.value == language.languageTag || chosenLanguage == language.languageTag) {
                             Icon(
                                 Icons.Default.Check,
                                 contentDescription = "Language Selected",

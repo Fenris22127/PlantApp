@@ -449,7 +449,7 @@ class PlantList {
                     ),
                     Sensitivity.MEDIUM,
                     R.drawable.img_moon_valley_pilea,
-                    listOf(R.drawable.img_plant)
+                    listOf(R.drawable.ph_moon_valley)
                 ),
                 Plant(
                     R.string.guzmania_hope,
